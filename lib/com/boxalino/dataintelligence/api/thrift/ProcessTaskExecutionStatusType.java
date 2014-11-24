@@ -13,41 +13,31 @@ import org.apache.thrift.TEnum;
 
 /**
  * This enumeration defines the possible process task execution statuses type (to check the completion of an execution of  process task and its result)
- * 
- * <dl>
- * <dt>WAITING</dt>
- * <dd>The process was not started yet</dd>
- * 
- * <dt>STARTED</dt>
- * <dd>The process has started and is currently running</dd>
- * </dl>
- * 
- * <dt>STARTED</dt>
- * <dd>The process has started and is currently running</dd>
- * </dl>
- * 
- * <dt>FINISHED_SUCCESS</dt>
- * <dd>The process has finished successfully</dd>
- * </dl>
- * 
- * <dt>FINISHED_WITH_WARNINGS</dt>
- * <dd>The process has finished, but with some warnings</dd>
- * </dl>
- * 
- * <dt>FAILED</dt>
- * <dd>The process has failed</dd>
- * </dl>
- * 
- * <dt>ABORTED</dt>
- * <dd>The process has been aborted</dd>
- * </dl>
  */
 public enum ProcessTaskExecutionStatusType implements org.apache.thrift.TEnum {
+  /**
+   * The process was not started yet
+   */
   WAITING(1),
+  /**
+   * The process has started and is currently running
+   */
   STARTED(2),
+  /**
+   * The process has finished successfully
+   */
   FINISHED_SUCCESS(3),
+  /**
+   * The process has finished, but with some warnings
+   */
   FINISHED_WITH_WARNINGS(4),
+  /**
+   * The process has failed
+   */
   FAILED(5),
+  /**
+   * The process has been aborted
+   */
   ABORTED(6);
 
   private final int value;

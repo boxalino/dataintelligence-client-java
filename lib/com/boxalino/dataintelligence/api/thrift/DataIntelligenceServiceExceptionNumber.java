@@ -13,67 +13,59 @@ import org.apache.thrift.TEnum;
 
 /**
  * This enumeration defines the possible exception states returned by Boxalino Data Intelligence Thrift API
- * 
- * <dl>
- * <dt>GENERAL_EXCEPTION</dt>
- * <dd>general case of exception (no special detailed provided)</dd>
- * 
- * <dt>INVALID_CREDENTIALS</dt>
- * <dd>the provided credentials to retrieve an authentication token are not valid (wrong username, password or both)</dd>
- * 
- * <dt>BLOCKED_USER</dt>
- * <dd>your user has been blocked (but it doesn't necessarily mean your account has been blocked)</dd>
- * 
- * <dt>BLOCKED_ACCOUNT</dt>
- * <dd>your account has been blocked, you must contact Boxalino (<a href="mailto:support@boxalino.com">support@boxalino.com</a>) to know the reasons of this blocking.</dd>
- * 
- * <dt>INVALID_AUTHENTICATION_TOKEN</dt>
- * <dd>the provided authentication token is invalid (wrong, or no more valid), you should get a new one by calling the GetAuthentication service.</dd>
- * 
- * <dt>INVALID_NEW_PASSWORD</dt>
- * <dd>specific to the service function UpdatePassword: means that the new password is not correct (should be at least 8 characters long and not contain any punctuation)</dd>
- * 
- * <dt>INVALID_CONFIGURATION_VERSION</dt>
- * <dd>the provided configuration object contains a configuration version number which doesn't exists or cannot be accessed</dd>
- * </dl>
- * 
- * <dt>INVALID_DATASOURCE</dt>
- * <dd>the provided XML data source is not correct (see documentation of the data source XML format)</dd>
- * </dl>
- * 
- * <dt>NON_EXISTING_CONTENT_ID</dt>
- * <dd>the provided content to be changed (updated, deleted, etc.) is defined with a content id which doesn't exists</dd>
- * </dl>
- * 
- * <dt>ALREADY_EXISTING_CONTENT_ID</dt>
- * <dd>the provided content id to be created already exists</dd>
- * </dl>
- * 
- * <dt>INVALID_CONTENT_ID</dt>
- * <dd>the provided content id doesn't not match the requested format (less than 50 alphanumeric characters without any punctuation or accent)</dd>
- * </dl>
- * 
- * <dt>INVALID_CONTENT</dt>
- * <dd>the provided content data are not correctly set</dd>
- * </dl>
- * 
- * <dt>INVALID_LANGUAGE</dt>
- * <dd>one of the provided languages has not been defined for this account</dd>
- * </dl>
  */
 public enum DataIntelligenceServiceExceptionNumber implements org.apache.thrift.TEnum {
+  /**
+   * general case of exception (no special detailed provided)
+   */
   GENERAL_EXCEPTION(1),
+  /**
+   * the provided credentials to retrieve an authentication token are not valid (wrong username, password or both)
+   */
   INVALID_CREDENTIALS(2),
+  /**
+   * your user has been blocked (but it doesn't necessarily mean your account has been blocked)
+   */
   BLOCKED_USER(3),
+  /**
+   * your account has been blocked, you must contact Boxalino (<a href="mailto:support@boxalino.com">support@boxalino.com</a>) to know the reasons of this blocking.
+   */
   BLOCKED_ACCOUNT(4),
+  /**
+   * the provided authentication token is invalid (wrong, or no more valid), you should get a new one by calling the GetAuthentication service.
+   */
   INVALID_AUTHENTICATION_TOKEN(5),
+  /**
+   * specific to the service function UpdatePassword: means that the new password is not correct (should be at least 8 characters long and not contain any punctuation)
+   */
   INVALID_NEW_PASSWORD(6),
+  /**
+   * the provided configuration object contains a configuration version number which doesn't exists or cannot be accessed
+   */
   INVALID_CONFIGURATION_VERSION(7),
+  /**
+   * the provided XML data source is not correct (see documentation of the data source XML format)
+   */
   INVALID_DATASOURCE(8),
+  /**
+   * the provided content to be changed (updated, deleted, etc.) is defined with a content id which doesn't exists
+   */
   NON_EXISTING_CONTENT_ID(9),
+  /**
+   * the provided content id to be created already exists
+   */
   ALREADY_EXISTING_CONTENT_ID(10),
+  /**
+   * the provided content id doesn't not match the requested format (less than 50 alphanumeric characters without any punctuation or accent)
+   */
   INVALID_CONTENT_ID(11),
+  /**
+   * the provided content data are not correctly set
+   */
   INVALID_CONTENT(12),
+  /**
+   * one of the provided languages has not been defined for this account
+   */
   INVALID_LANGUAGE(13),
   DUPLICATED_FILE_ID(14),
   EMPTY_COLUMNS_LIST(15),

@@ -13,39 +13,35 @@ import org.apache.thrift.TEnum;
 
 /**
  * This enumeration defines possible types of columns which can be used in a reference CSV file
- * 
- * <dl>
- * 
- * <dt>STRING</dt>
- * <dd>text string encoded using UTF-8 encoding</dd>
- * 
- * <dt>INTEGER</dt>
- * <dd>64-bit signed integer</dd>
- * 
- * <dt>DOUBLE</dt>
- * <dd>floating point number</dd>
- * 
- * <dt>DATETIME</dt>
- * <dd>textual representation of the date and time</dd>
- * 
- * <dt>DATE</dt>
- * <dd>textual representation of the date</dd>
- * 
- * <dt>TIME</dt>
- * <dd>textual representation of the time</dd>
- * 
- * <dt>UNIX_TIMESTAMP</dt>
- * <dd>numerical representation of the date and time</dd>
- * 
- * </dl>
  */
 public enum CSVFileColumnType implements org.apache.thrift.TEnum {
+  /**
+   * text string encoded using UTF-8 encoding
+   */
   STRING(1),
+  /**
+   * signed 64-bit integer
+   */
   INTEGER(2),
+  /**
+   * floating point number
+   */
   DOUBLE(3),
+  /**
+   * textual representation of the date and time in the format YYYY-MM-DD HH:MM:SS
+   */
   DATETIME(4),
+  /**
+   * textual representation of the date in the format YYYY-MM-DD
+   */
   DATE(5),
+  /**
+   * textual representation of the time in the format HH:MM:SS
+   */
   TIME(6),
+  /**
+   * numerical representation of the date and time as an unsigned 32-bit integer, counting the seconds since the start of the UNIX epoch
+   */
   UNIX_TIMESTAMP(7);
 
   private final int value;

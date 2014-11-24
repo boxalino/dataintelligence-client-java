@@ -13,17 +13,15 @@ import org.apache.thrift.TEnum;
 
 /**
  * This enumeration defines the version type. All contents are versioned, normally, you want to change the current development version and then, when finished, publish it (so it becomes the new production version and a new development version is created), but it is also possible to access the production version directly
- * 
- * <dl>
- * <dt>CURRENT_DEVELOPMENT_VERSION</dt>
- * <dd>this is the normal case, as you want to retrieve the current dev version of your account configuration and not touch the production one</dd>
- * 
- * <dt>CURRENT_PRODUCTION_VERSION</dt>
- * <dd>this should only be used in rare cases where you want to recuperate information from the production configuration, but be careful in changing this version as it will immediately affect your production processes!</dd>
- * </dl>
  */
 public enum ConfigurationVersionType implements org.apache.thrift.TEnum {
+  /**
+   * this is the normal case, as you want to retrieve the current dev version of your account configuration and not touch the production one
+   */
   CURRENT_DEVELOPMENT_VERSION(1),
+  /**
+   * this should only be used in rare cases where you want to recuperate information from the production configuration, but be careful in changing this version as it will immediately affect your production processes!
+   */
   CURRENT_PRODUCTION_VERSION(2);
 
   private final int value;

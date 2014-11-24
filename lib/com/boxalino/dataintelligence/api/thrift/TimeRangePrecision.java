@@ -13,19 +13,19 @@ import org.apache.thrift.TEnum;
 
 /**
  * This enumeration defines possible granularities used in time ranges
- * 
- * <dl>
- * <dt>DAY</dt>
- * <dd>daily precision</dd>
- * <dt>WEEK</dt>
- * <dd>weekly precision</dd>
- * <dt>MONTH</dt>
- * <dd>monthly precision</dd>
- * </dl>
  */
 public enum TimeRangePrecision implements org.apache.thrift.TEnum {
+  /**
+   * daily precision
+   */
   DAY(1),
+  /**
+   * weekly precision
+   */
   WEEK(2),
+  /**
+   * monthly precision
+   */
   MONTH(3);
 
   private final int value;
