@@ -77,7 +77,8 @@ public enum DataIntelligenceServiceExceptionNumber implements org.apache.thrift.
   INVALID_LANGUAGE(13),
   DUPLICATED_FILE_ID(14),
   EMPTY_COLUMNS_LIST(15),
-  NON_EXISTING_FILE(16);
+  NON_EXISTING_FILE(16),
+  INVALID_RANGE(17);
 
   private final int value;
 
@@ -130,6 +131,8 @@ public enum DataIntelligenceServiceExceptionNumber implements org.apache.thrift.
         return EMPTY_COLUMNS_LIST;
       case 16:
         return NON_EXISTING_FILE;
+      case 17:
+        return INVALID_RANGE;
       default:
         return null;
     }
