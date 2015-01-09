@@ -67,9 +67,21 @@ public enum DataIntelligenceServiceExceptionNumber implements org.apache.thrift.
    * one of the provided languages has not been defined for this account
    */
   INVALID_LANGUAGE(13),
+  /**
+   * the provided file identifier has been already used
+   */
   DUPLICATED_FILE_ID(14),
+  /**
+   * the provided list of columns is empty
+   */
   EMPTY_COLUMNS_LIST(15),
+  /**
+   * the provided file identifier was not found
+   */
   NON_EXISTING_FILE(16),
+  /**
+   * the provided time range is incorrect (start timestamp is higher than the end one)
+   */
   INVALID_RANGE(17);
 
   private final int value;
