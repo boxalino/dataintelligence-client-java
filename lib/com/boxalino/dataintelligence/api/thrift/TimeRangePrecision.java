@@ -26,7 +26,19 @@ public enum TimeRangePrecision implements org.apache.thrift.TEnum {
   /**
    * monthly precision
    */
-  MONTH(3);
+  MONTH(3),
+  /**
+   * quarterly precision
+   */
+  QUARTER(4),
+  /**
+   * yearly precision
+   */
+  YEAR(5),
+  /**
+   * return all data for provided date range as one
+   */
+  ALL(6);
 
   private final int value;
 
@@ -53,6 +65,12 @@ public enum TimeRangePrecision implements org.apache.thrift.TEnum {
         return WEEK;
       case 3:
         return MONTH;
+      case 4:
+        return QUARTER;
+      case 5:
+        return YEAR;
+      case 6:
+        return ALL;
       default:
         return null;
     }

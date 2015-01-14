@@ -82,7 +82,11 @@ public enum DataIntelligenceServiceExceptionNumber implements org.apache.thrift.
   /**
    * the provided time range is incorrect (start timestamp is higher than the end one)
    */
-  INVALID_RANGE(17);
+  INVALID_RANGE(17),
+  /**
+   * the provided report request contains some invalid parameters settings (missing settings, conflicting settings, etc.)
+   */
+  INVALID_REPORT_REQUEST(18);
 
   private final int value;
 
@@ -137,6 +141,8 @@ public enum DataIntelligenceServiceExceptionNumber implements org.apache.thrift.
         return NON_EXISTING_FILE;
       case 17:
         return INVALID_RANGE;
+      case 18:
+        return INVALID_REPORT_REQUEST;
       default:
         return null;
     }
