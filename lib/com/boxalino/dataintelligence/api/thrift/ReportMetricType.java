@@ -118,6 +118,10 @@ public enum ReportMetricType implements org.apache.thrift.TEnum {
    */
   TRANSACTIONS_PARAMETER_SUM(29),
   /**
+   * count of the total number of transaction items (one product with quantity one is one item)
+   */
+  TRANSACTIONS_QUANTITY(30),
+  /**
    * number of add-to-basket events
    */
   ADD_TO_BASKETS(24),
@@ -203,6 +207,8 @@ public enum ReportMetricType implements org.apache.thrift.TEnum {
         return TRANSACTIONS_TURNOVER;
       case 29:
         return TRANSACTIONS_PARAMETER_SUM;
+      case 30:
+        return TRANSACTIONS_QUANTITY;
       case 24:
         return ADD_TO_BASKETS;
       case 25:
