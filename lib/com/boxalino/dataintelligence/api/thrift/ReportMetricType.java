@@ -136,7 +136,84 @@ public enum ReportMetricType implements org.apache.thrift.TEnum {
   /**
    * VISITS_WITH_ADD_TO_BASKETS / VISITS
    */
-  VISITS_WITH_ADD_TO_BASKETS_RATE(27);
+  VISITS_WITH_ADD_TO_BASKETS_RATE(27),
+  /**
+   * number of time the event has occurred
+   */
+  EVENT_COUNT(40),
+  /**
+   * number of display of a choice
+   */
+  CHOICE_DISPLAYS(100),
+  /**
+   * number of visits having at least one choice display
+   */
+  VISITS_WITH_CHOICE_DISPLAYS(101),
+  /**
+   * number of product views event related to product displayed in a choice display
+   * if a ReportDimension is on the product id, then only for this product id
+   */
+  PRODUCT_VIEWS_FROM_CHOICE_DISPLAY(110),
+  /**
+   * number of visits having at least one product views event related to product displayed in a choice display
+   * if a ReportDimension is on the product id, then only for this product id
+   * if a ReportDimension is on a Choice, then only for this choice
+   * if a ReportDimension is on a ChoiceVariant, then only for this choice variant
+   */
+  VISITS_WITH_PRODUCT_VIEWS_FROM_CHOICE_DISPLAY(111),
+  /**
+   * number of transactions related to product displayed in a choice display
+   * if a ReportDimension is on the product id, then only for this product id
+   * if a ReportDimension is on a Choice, then only for this choice
+   * if a ReportDimension is on a ChoiceVariant, then only for this choice variant
+   */
+  TRANSACTIONS_FROM_CHOICE_DISPLAY(112),
+  /**
+   * sum of transaction property value of transactions related to product displayed in a choice display
+   * if a ReportDimension is on the product id, then only for this product id
+   * if a ReportDimension is on a Choice, then only for this choice
+   * if a ReportDimension is on a ChoiceVariant, then only for this choice variant
+   */
+  TRANSACTIONS_PARAMETER_SUM_FROM_CHOICE_DISPLAY(113),
+  /**
+   * number of visits having at least one transaction event related to product displayed in a choice display
+   * if a ReportDimension is on the product id, then only for this product id
+   * if a ReportDimension is on a Choice, then only for this choice
+   * if a ReportDimension is on a ChoiceVariant, then only for this choice variant
+   */
+  VISITS_WITH_TRANSACTIONS_FROM_CHOICE_DISPLAY(114),
+  /**
+   * number of add to baskets related to product displayed in a choice display
+   * if a ReportDimension is on the product id, then only for this product id
+   * if a ReportDimension is on a Choice, then only for this choice
+   * if a ReportDimension is on a ChoiceVariant, then only for this choice variant
+   */
+  ADD_TO_BASKETS_FROM_CHOICE_DISPLAY(115),
+  /**
+   * number of visits having at least one add to basket related to product displayed in a choice display
+   * if a ReportDimension is on the product id, then only for this product id
+   * if a ReportDimension is on a Choice, then only for this choice
+   * if a ReportDimension is on a ChoiceVariant, then only for this choice variant
+   */
+  VISITS_WITH_ADD_TO_BASKETS_FROM_CHOICE_DISPLAY(116),
+  /**
+   * number of goals related to product displayed in a choice display
+   * (require identifier to be provided with the choice identifier)
+   * (will only work if a product identifier is provided with the goal)
+   * if a ReportDimension is on the product id, then only for this product id
+   * if a ReportDimension is on a Choice, then only for this choice
+   * if a ReportDimension is on a ChoiceVariant, then only for this choice variant
+   */
+  GOALS_FROM_CHOICE_DISPLAY(117),
+  /**
+   * number of visits having at least goal related to product displayed in a choice display
+   * (require identifier to be provided with the choice identifier)
+   * (will only work if a product identifier is provided with the goal)
+   * if a ReportDimension is on the product id, then only for this product id
+   * if a ReportDimension is on a Choice, then only for this choice
+   * if a ReportDimension is on a ChoiceVariant, then only for this choice variant
+   */
+  VISITS_WITH_GOALS_FROM_CHOICE_DISPLAY(118);
 
   private final int value;
 
@@ -217,6 +294,30 @@ public enum ReportMetricType implements org.apache.thrift.TEnum {
         return VISITS_WITH_ADD_TO_BASKETS;
       case 27:
         return VISITS_WITH_ADD_TO_BASKETS_RATE;
+      case 40:
+        return EVENT_COUNT;
+      case 100:
+        return CHOICE_DISPLAYS;
+      case 101:
+        return VISITS_WITH_CHOICE_DISPLAYS;
+      case 110:
+        return PRODUCT_VIEWS_FROM_CHOICE_DISPLAY;
+      case 111:
+        return VISITS_WITH_PRODUCT_VIEWS_FROM_CHOICE_DISPLAY;
+      case 112:
+        return TRANSACTIONS_FROM_CHOICE_DISPLAY;
+      case 113:
+        return TRANSACTIONS_PARAMETER_SUM_FROM_CHOICE_DISPLAY;
+      case 114:
+        return VISITS_WITH_TRANSACTIONS_FROM_CHOICE_DISPLAY;
+      case 115:
+        return ADD_TO_BASKETS_FROM_CHOICE_DISPLAY;
+      case 116:
+        return VISITS_WITH_ADD_TO_BASKETS_FROM_CHOICE_DISPLAY;
+      case 117:
+        return GOALS_FROM_CHOICE_DISPLAY;
+      case 118:
+        return VISITS_WITH_GOALS_FROM_CHOICE_DISPLAY;
       default:
         return null;
     }
