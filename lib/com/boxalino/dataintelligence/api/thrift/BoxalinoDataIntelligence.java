@@ -1280,7 +1280,7 @@ public class BoxalinoDataIntelligence {
     public String GetLastTransactionID(Authentication authentication, ConfigurationVersion configuration) throws DataIntelligenceServiceException, org.apache.thrift.TException;
 
     /**
-     * DEPRECITATED: USE GetChoiceReport service instead with ReportMetric: PAGE_VIEWS
+     * DEPRECITATED: USE GetBehaviorReport service instead with ReportMetric: PAGE_VIEWS
      * This service function retrieves number of visits for each time range with selected precision.
      * 
      * <dl>
@@ -1304,28 +1304,6 @@ public class BoxalinoDataIntelligence {
      * @param precision
      */
     public List<TimeRangeValue> GetPageViews(Authentication authentication, ConfigurationVersion configuration, TimeRange range, TimeRangePrecision precision) throws DataIntelligenceServiceException, org.apache.thrift.TException;
-
-    /**
-     * This service function provides an choice statistical report.
-     * 
-     * <dl>
-     * <dt>@param authenticationToken</dt>
-     * <dd>the authentication object as returned by the GetAuthentication service function in the AuthenticationResponse struct</dd>
-     * <dt>@param configurationVersion</dt>
-     * <dd>a ConfigurationVersion object indicating the configuration version number (as returned by function GetConfigurationVersion)</dd>
-     * <dt>@param request</dt>
-     * <dd>The statistical report request indicating the parameters of the requested report: dimension, metrics, etc.</dd>
-     * <dt>@throws DataIntelligenceServiceException</dt>
-     * <dd>INVALID_AUTHENTICATION_TOKEN:if the provided authentication token is not valid or has expired (1 hour validity).</dd>
-     * <dd>INVALID_CONFIGURATION_VERSION: if the provided configuration version is not valid.</dd>
-     * <dd>INVALID_REPORT_REQUEST: if the provided report request is not valid.</dd>
-     * </dl>
-     * 
-     * @param authentication
-     * @param configuration
-     * @param request
-     */
-    public ChoiceReport GetChoiceReport(Authentication authentication, ConfigurationVersion configuration, ChoiceReportRequest request) throws DataIntelligenceServiceException, org.apache.thrift.TException;
 
     /**
      * This service function provides an transaction statistical report.
@@ -1488,8 +1466,6 @@ public class BoxalinoDataIntelligence {
     public void GetLastTransactionID(Authentication authentication, ConfigurationVersion configuration, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
 
     public void GetPageViews(Authentication authentication, ConfigurationVersion configuration, TimeRange range, TimeRangePrecision precision, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
-
-    public void GetChoiceReport(Authentication authentication, ConfigurationVersion configuration, ChoiceReportRequest request, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
 
     public void GetTransactionReport(Authentication authentication, ConfigurationVersion configuration, TransactionReportRequest request, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
 
@@ -2991,34 +2967,6 @@ public class BoxalinoDataIntelligence {
         throw result.e;
       }
       throw new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.MISSING_RESULT, "GetPageViews failed: unknown result");
-    }
-
-    public ChoiceReport GetChoiceReport(Authentication authentication, ConfigurationVersion configuration, ChoiceReportRequest request) throws DataIntelligenceServiceException, org.apache.thrift.TException
-    {
-      send_GetChoiceReport(authentication, configuration, request);
-      return recv_GetChoiceReport();
-    }
-
-    public void send_GetChoiceReport(Authentication authentication, ConfigurationVersion configuration, ChoiceReportRequest request) throws org.apache.thrift.TException
-    {
-      GetChoiceReport_args args = new GetChoiceReport_args();
-      args.setAuthentication(authentication);
-      args.setConfiguration(configuration);
-      args.setRequest(request);
-      sendBase("GetChoiceReport", args);
-    }
-
-    public ChoiceReport recv_GetChoiceReport() throws DataIntelligenceServiceException, org.apache.thrift.TException
-    {
-      GetChoiceReport_result result = new GetChoiceReport_result();
-      receiveBase(result, "GetChoiceReport");
-      if (result.isSetSuccess()) {
-        return result.success;
-      }
-      if (result.e != null) {
-        throw result.e;
-      }
-      throw new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.MISSING_RESULT, "GetChoiceReport failed: unknown result");
     }
 
     public TransactionReport GetTransactionReport(Authentication authentication, ConfigurationVersion configuration, TransactionReportRequest request) throws DataIntelligenceServiceException, org.apache.thrift.TException
@@ -5243,44 +5191,6 @@ public class BoxalinoDataIntelligence {
       }
     }
 
-    public void GetChoiceReport(Authentication authentication, ConfigurationVersion configuration, ChoiceReportRequest request, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException {
-      checkReady();
-      GetChoiceReport_call method_call = new GetChoiceReport_call(authentication, configuration, request, resultHandler, this, ___protocolFactory, ___transport);
-      this.___currentMethod = method_call;
-      ___manager.call(method_call);
-    }
-
-    public static class GetChoiceReport_call extends org.apache.thrift.async.TAsyncMethodCall {
-      private Authentication authentication;
-      private ConfigurationVersion configuration;
-      private ChoiceReportRequest request;
-      public GetChoiceReport_call(Authentication authentication, ConfigurationVersion configuration, ChoiceReportRequest request, org.apache.thrift.async.AsyncMethodCallback resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
-        super(client, protocolFactory, transport, resultHandler, false);
-        this.authentication = authentication;
-        this.configuration = configuration;
-        this.request = request;
-      }
-
-      public void write_args(org.apache.thrift.protocol.TProtocol prot) throws org.apache.thrift.TException {
-        prot.writeMessageBegin(new org.apache.thrift.protocol.TMessage("GetChoiceReport", org.apache.thrift.protocol.TMessageType.CALL, 0));
-        GetChoiceReport_args args = new GetChoiceReport_args();
-        args.setAuthentication(authentication);
-        args.setConfiguration(configuration);
-        args.setRequest(request);
-        args.write(prot);
-        prot.writeMessageEnd();
-      }
-
-      public ChoiceReport getResult() throws DataIntelligenceServiceException, org.apache.thrift.TException {
-        if (getState() != org.apache.thrift.async.TAsyncMethodCall.State.RESPONSE_READ) {
-          throw new IllegalStateException("Method call not finished!");
-        }
-        org.apache.thrift.transport.TMemoryInputTransport memoryTransport = new org.apache.thrift.transport.TMemoryInputTransport(getFrameBuffer().array());
-        org.apache.thrift.protocol.TProtocol prot = client.getProtocolFactory().getProtocol(memoryTransport);
-        return (new Client(prot)).recv_GetChoiceReport();
-      }
-    }
-
     public void GetTransactionReport(Authentication authentication, ConfigurationVersion configuration, TransactionReportRequest request, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException {
       checkReady();
       GetTransactionReport_call method_call = new GetTransactionReport_call(authentication, configuration, request, resultHandler, this, ___protocolFactory, ___transport);
@@ -5427,7 +5337,6 @@ public class BoxalinoDataIntelligence {
       processMap.put("DeleteReferenceCSVDataSource", new DeleteReferenceCSVDataSource());
       processMap.put("GetLastTransactionID", new GetLastTransactionID());
       processMap.put("GetPageViews", new GetPageViews());
-      processMap.put("GetChoiceReport", new GetChoiceReport());
       processMap.put("GetTransactionReport", new GetTransactionReport());
       processMap.put("GetBehaviorReport", new GetBehaviorReport());
       return processMap;
@@ -6801,30 +6710,6 @@ public class BoxalinoDataIntelligence {
       }
     }
 
-    public static class GetChoiceReport<I extends Iface> extends org.apache.thrift.ProcessFunction<I, GetChoiceReport_args> {
-      public GetChoiceReport() {
-        super("GetChoiceReport");
-      }
-
-      public GetChoiceReport_args getEmptyArgsInstance() {
-        return new GetChoiceReport_args();
-      }
-
-      protected boolean isOneway() {
-        return false;
-      }
-
-      public GetChoiceReport_result getResult(I iface, GetChoiceReport_args args) throws org.apache.thrift.TException {
-        GetChoiceReport_result result = new GetChoiceReport_result();
-        try {
-          result.success = iface.GetChoiceReport(args.authentication, args.configuration, args.request);
-        } catch (DataIntelligenceServiceException e) {
-          result.e = e;
-        }
-        return result;
-      }
-    }
-
     public static class GetTransactionReport<I extends Iface> extends org.apache.thrift.ProcessFunction<I, GetTransactionReport_args> {
       public GetTransactionReport() {
         super("GetTransactionReport");
@@ -6943,7 +6828,6 @@ public class BoxalinoDataIntelligence {
       processMap.put("DeleteReferenceCSVDataSource", new DeleteReferenceCSVDataSource());
       processMap.put("GetLastTransactionID", new GetLastTransactionID());
       processMap.put("GetPageViews", new GetPageViews());
-      processMap.put("GetChoiceReport", new GetChoiceReport());
       processMap.put("GetTransactionReport", new GetTransactionReport());
       processMap.put("GetBehaviorReport", new GetBehaviorReport());
       return processMap;
@@ -10157,63 +10041,6 @@ public class BoxalinoDataIntelligence {
 
       public void start(I iface, GetPageViews_args args, org.apache.thrift.async.AsyncMethodCallback<List<TimeRangeValue>> resultHandler) throws TException {
         iface.GetPageViews(args.authentication, args.configuration, args.range, args.precision,resultHandler);
-      }
-    }
-
-    public static class GetChoiceReport<I extends AsyncIface> extends org.apache.thrift.AsyncProcessFunction<I, GetChoiceReport_args, ChoiceReport> {
-      public GetChoiceReport() {
-        super("GetChoiceReport");
-      }
-
-      public GetChoiceReport_args getEmptyArgsInstance() {
-        return new GetChoiceReport_args();
-      }
-
-      public AsyncMethodCallback<ChoiceReport> getResultHandler(final AsyncFrameBuffer fb, final int seqid) {
-        final org.apache.thrift.AsyncProcessFunction fcall = this;
-        return new AsyncMethodCallback<ChoiceReport>() { 
-          public void onComplete(ChoiceReport o) {
-            GetChoiceReport_result result = new GetChoiceReport_result();
-            result.success = o;
-            try {
-              fcall.sendResponse(fb,result, org.apache.thrift.protocol.TMessageType.REPLY,seqid);
-              return;
-            } catch (Exception e) {
-              LOGGER.error("Exception writing to internal frame buffer", e);
-            }
-            fb.close();
-          }
-          public void onError(Exception e) {
-            byte msgType = org.apache.thrift.protocol.TMessageType.REPLY;
-            org.apache.thrift.TBase msg;
-            GetChoiceReport_result result = new GetChoiceReport_result();
-            if (e instanceof DataIntelligenceServiceException) {
-                        result.e = (DataIntelligenceServiceException) e;
-                        result.setEIsSet(true);
-                        msg = result;
-            }
-             else 
-            {
-              msgType = org.apache.thrift.protocol.TMessageType.EXCEPTION;
-              msg = (org.apache.thrift.TBase)new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.INTERNAL_ERROR, e.getMessage());
-            }
-            try {
-              fcall.sendResponse(fb,msg,msgType,seqid);
-              return;
-            } catch (Exception ex) {
-              LOGGER.error("Exception writing to internal frame buffer", ex);
-            }
-            fb.close();
-          }
-        };
-      }
-
-      protected boolean isOneway() {
-        return false;
-      }
-
-      public void start(I iface, GetChoiceReport_args args, org.apache.thrift.async.AsyncMethodCallback<ChoiceReport> resultHandler) throws TException {
-        iface.GetChoiceReport(args.authentication, args.configuration, args.request,resultHandler);
       }
     }
 
@@ -14789,16 +14616,16 @@ public class BoxalinoDataIntelligence {
             case 0: // SUCCESS
               if (schemeField.type == org.apache.thrift.protocol.TType.MAP) {
                 {
-                  org.apache.thrift.protocol.TMap _map298 = iprot.readMapBegin();
-                  struct.success = new HashMap<String,Field>(2*_map298.size);
-                  String _key299;
-                  Field _val300;
-                  for (int _i301 = 0; _i301 < _map298.size; ++_i301)
+                  org.apache.thrift.protocol.TMap _map258 = iprot.readMapBegin();
+                  struct.success = new HashMap<String,Field>(2*_map258.size);
+                  String _key259;
+                  Field _val260;
+                  for (int _i261 = 0; _i261 < _map258.size; ++_i261)
                   {
-                    _key299 = iprot.readString();
-                    _val300 = new Field();
-                    _val300.read(iprot);
-                    struct.success.put(_key299, _val300);
+                    _key259 = iprot.readString();
+                    _val260 = new Field();
+                    _val260.read(iprot);
+                    struct.success.put(_key259, _val260);
                   }
                   iprot.readMapEnd();
                 }
@@ -14835,10 +14662,10 @@ public class BoxalinoDataIntelligence {
           oprot.writeFieldBegin(SUCCESS_FIELD_DESC);
           {
             oprot.writeMapBegin(new org.apache.thrift.protocol.TMap(org.apache.thrift.protocol.TType.STRING, org.apache.thrift.protocol.TType.STRUCT, struct.success.size()));
-            for (Map.Entry<String, Field> _iter302 : struct.success.entrySet())
+            for (Map.Entry<String, Field> _iter262 : struct.success.entrySet())
             {
-              oprot.writeString(_iter302.getKey());
-              _iter302.getValue().write(oprot);
+              oprot.writeString(_iter262.getKey());
+              _iter262.getValue().write(oprot);
             }
             oprot.writeMapEnd();
           }
@@ -14877,10 +14704,10 @@ public class BoxalinoDataIntelligence {
         if (struct.isSetSuccess()) {
           {
             oprot.writeI32(struct.success.size());
-            for (Map.Entry<String, Field> _iter303 : struct.success.entrySet())
+            for (Map.Entry<String, Field> _iter263 : struct.success.entrySet())
             {
-              oprot.writeString(_iter303.getKey());
-              _iter303.getValue().write(oprot);
+              oprot.writeString(_iter263.getKey());
+              _iter263.getValue().write(oprot);
             }
           }
         }
@@ -14895,16 +14722,16 @@ public class BoxalinoDataIntelligence {
         BitSet incoming = iprot.readBitSet(2);
         if (incoming.get(0)) {
           {
-            org.apache.thrift.protocol.TMap _map304 = new org.apache.thrift.protocol.TMap(org.apache.thrift.protocol.TType.STRING, org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
-            struct.success = new HashMap<String,Field>(2*_map304.size);
-            String _key305;
-            Field _val306;
-            for (int _i307 = 0; _i307 < _map304.size; ++_i307)
+            org.apache.thrift.protocol.TMap _map264 = new org.apache.thrift.protocol.TMap(org.apache.thrift.protocol.TType.STRING, org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
+            struct.success = new HashMap<String,Field>(2*_map264.size);
+            String _key265;
+            Field _val266;
+            for (int _i267 = 0; _i267 < _map264.size; ++_i267)
             {
-              _key305 = iprot.readString();
-              _val306 = new Field();
-              _val306.read(iprot);
-              struct.success.put(_key305, _val306);
+              _key265 = iprot.readString();
+              _val266 = new Field();
+              _val266.read(iprot);
+              struct.success.put(_key265, _val266);
             }
           }
           struct.setSuccessIsSet(true);
@@ -18635,16 +18462,16 @@ public class BoxalinoDataIntelligence {
             case 0: // SUCCESS
               if (schemeField.type == org.apache.thrift.protocol.TType.MAP) {
                 {
-                  org.apache.thrift.protocol.TMap _map308 = iprot.readMapBegin();
-                  struct.success = new HashMap<String,ProcessTask>(2*_map308.size);
-                  String _key309;
-                  ProcessTask _val310;
-                  for (int _i311 = 0; _i311 < _map308.size; ++_i311)
+                  org.apache.thrift.protocol.TMap _map268 = iprot.readMapBegin();
+                  struct.success = new HashMap<String,ProcessTask>(2*_map268.size);
+                  String _key269;
+                  ProcessTask _val270;
+                  for (int _i271 = 0; _i271 < _map268.size; ++_i271)
                   {
-                    _key309 = iprot.readString();
-                    _val310 = new ProcessTask();
-                    _val310.read(iprot);
-                    struct.success.put(_key309, _val310);
+                    _key269 = iprot.readString();
+                    _val270 = new ProcessTask();
+                    _val270.read(iprot);
+                    struct.success.put(_key269, _val270);
                   }
                   iprot.readMapEnd();
                 }
@@ -18681,10 +18508,10 @@ public class BoxalinoDataIntelligence {
           oprot.writeFieldBegin(SUCCESS_FIELD_DESC);
           {
             oprot.writeMapBegin(new org.apache.thrift.protocol.TMap(org.apache.thrift.protocol.TType.STRING, org.apache.thrift.protocol.TType.STRUCT, struct.success.size()));
-            for (Map.Entry<String, ProcessTask> _iter312 : struct.success.entrySet())
+            for (Map.Entry<String, ProcessTask> _iter272 : struct.success.entrySet())
             {
-              oprot.writeString(_iter312.getKey());
-              _iter312.getValue().write(oprot);
+              oprot.writeString(_iter272.getKey());
+              _iter272.getValue().write(oprot);
             }
             oprot.writeMapEnd();
           }
@@ -18723,10 +18550,10 @@ public class BoxalinoDataIntelligence {
         if (struct.isSetSuccess()) {
           {
             oprot.writeI32(struct.success.size());
-            for (Map.Entry<String, ProcessTask> _iter313 : struct.success.entrySet())
+            for (Map.Entry<String, ProcessTask> _iter273 : struct.success.entrySet())
             {
-              oprot.writeString(_iter313.getKey());
-              _iter313.getValue().write(oprot);
+              oprot.writeString(_iter273.getKey());
+              _iter273.getValue().write(oprot);
             }
           }
         }
@@ -18741,16 +18568,16 @@ public class BoxalinoDataIntelligence {
         BitSet incoming = iprot.readBitSet(2);
         if (incoming.get(0)) {
           {
-            org.apache.thrift.protocol.TMap _map314 = new org.apache.thrift.protocol.TMap(org.apache.thrift.protocol.TType.STRING, org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
-            struct.success = new HashMap<String,ProcessTask>(2*_map314.size);
-            String _key315;
-            ProcessTask _val316;
-            for (int _i317 = 0; _i317 < _map314.size; ++_i317)
+            org.apache.thrift.protocol.TMap _map274 = new org.apache.thrift.protocol.TMap(org.apache.thrift.protocol.TType.STRING, org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
+            struct.success = new HashMap<String,ProcessTask>(2*_map274.size);
+            String _key275;
+            ProcessTask _val276;
+            for (int _i277 = 0; _i277 < _map274.size; ++_i277)
             {
-              _key315 = iprot.readString();
-              _val316 = new ProcessTask();
-              _val316.read(iprot);
-              struct.success.put(_key315, _val316);
+              _key275 = iprot.readString();
+              _val276 = new ProcessTask();
+              _val276.read(iprot);
+              struct.success.put(_key275, _val276);
             }
           }
           struct.setSuccessIsSet(true);
@@ -23535,16 +23362,16 @@ public class BoxalinoDataIntelligence {
             case 0: // SUCCESS
               if (schemeField.type == org.apache.thrift.protocol.TType.MAP) {
                 {
-                  org.apache.thrift.protocol.TMap _map318 = iprot.readMapBegin();
-                  struct.success = new HashMap<String,EmailCampaign>(2*_map318.size);
-                  String _key319;
-                  EmailCampaign _val320;
-                  for (int _i321 = 0; _i321 < _map318.size; ++_i321)
+                  org.apache.thrift.protocol.TMap _map278 = iprot.readMapBegin();
+                  struct.success = new HashMap<String,EmailCampaign>(2*_map278.size);
+                  String _key279;
+                  EmailCampaign _val280;
+                  for (int _i281 = 0; _i281 < _map278.size; ++_i281)
                   {
-                    _key319 = iprot.readString();
-                    _val320 = new EmailCampaign();
-                    _val320.read(iprot);
-                    struct.success.put(_key319, _val320);
+                    _key279 = iprot.readString();
+                    _val280 = new EmailCampaign();
+                    _val280.read(iprot);
+                    struct.success.put(_key279, _val280);
                   }
                   iprot.readMapEnd();
                 }
@@ -23581,10 +23408,10 @@ public class BoxalinoDataIntelligence {
           oprot.writeFieldBegin(SUCCESS_FIELD_DESC);
           {
             oprot.writeMapBegin(new org.apache.thrift.protocol.TMap(org.apache.thrift.protocol.TType.STRING, org.apache.thrift.protocol.TType.STRUCT, struct.success.size()));
-            for (Map.Entry<String, EmailCampaign> _iter322 : struct.success.entrySet())
+            for (Map.Entry<String, EmailCampaign> _iter282 : struct.success.entrySet())
             {
-              oprot.writeString(_iter322.getKey());
-              _iter322.getValue().write(oprot);
+              oprot.writeString(_iter282.getKey());
+              _iter282.getValue().write(oprot);
             }
             oprot.writeMapEnd();
           }
@@ -23623,10 +23450,10 @@ public class BoxalinoDataIntelligence {
         if (struct.isSetSuccess()) {
           {
             oprot.writeI32(struct.success.size());
-            for (Map.Entry<String, EmailCampaign> _iter323 : struct.success.entrySet())
+            for (Map.Entry<String, EmailCampaign> _iter283 : struct.success.entrySet())
             {
-              oprot.writeString(_iter323.getKey());
-              _iter323.getValue().write(oprot);
+              oprot.writeString(_iter283.getKey());
+              _iter283.getValue().write(oprot);
             }
           }
         }
@@ -23641,16 +23468,16 @@ public class BoxalinoDataIntelligence {
         BitSet incoming = iprot.readBitSet(2);
         if (incoming.get(0)) {
           {
-            org.apache.thrift.protocol.TMap _map324 = new org.apache.thrift.protocol.TMap(org.apache.thrift.protocol.TType.STRING, org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
-            struct.success = new HashMap<String,EmailCampaign>(2*_map324.size);
-            String _key325;
-            EmailCampaign _val326;
-            for (int _i327 = 0; _i327 < _map324.size; ++_i327)
+            org.apache.thrift.protocol.TMap _map284 = new org.apache.thrift.protocol.TMap(org.apache.thrift.protocol.TType.STRING, org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
+            struct.success = new HashMap<String,EmailCampaign>(2*_map284.size);
+            String _key285;
+            EmailCampaign _val286;
+            for (int _i287 = 0; _i287 < _map284.size; ++_i287)
             {
-              _key325 = iprot.readString();
-              _val326 = new EmailCampaign();
-              _val326.read(iprot);
-              struct.success.put(_key325, _val326);
+              _key285 = iprot.readString();
+              _val286 = new EmailCampaign();
+              _val286.read(iprot);
+              struct.success.put(_key285, _val286);
             }
           }
           struct.setSuccessIsSet(true);
@@ -27486,16 +27313,16 @@ public class BoxalinoDataIntelligence {
             case 0: // SUCCESS
               if (schemeField.type == org.apache.thrift.protocol.TType.MAP) {
                 {
-                  org.apache.thrift.protocol.TMap _map328 = iprot.readMapBegin();
-                  struct.success = new HashMap<String,Choice>(2*_map328.size);
-                  String _key329;
-                  Choice _val330;
-                  for (int _i331 = 0; _i331 < _map328.size; ++_i331)
+                  org.apache.thrift.protocol.TMap _map288 = iprot.readMapBegin();
+                  struct.success = new HashMap<String,Choice>(2*_map288.size);
+                  String _key289;
+                  Choice _val290;
+                  for (int _i291 = 0; _i291 < _map288.size; ++_i291)
                   {
-                    _key329 = iprot.readString();
-                    _val330 = new Choice();
-                    _val330.read(iprot);
-                    struct.success.put(_key329, _val330);
+                    _key289 = iprot.readString();
+                    _val290 = new Choice();
+                    _val290.read(iprot);
+                    struct.success.put(_key289, _val290);
                   }
                   iprot.readMapEnd();
                 }
@@ -27532,10 +27359,10 @@ public class BoxalinoDataIntelligence {
           oprot.writeFieldBegin(SUCCESS_FIELD_DESC);
           {
             oprot.writeMapBegin(new org.apache.thrift.protocol.TMap(org.apache.thrift.protocol.TType.STRING, org.apache.thrift.protocol.TType.STRUCT, struct.success.size()));
-            for (Map.Entry<String, Choice> _iter332 : struct.success.entrySet())
+            for (Map.Entry<String, Choice> _iter292 : struct.success.entrySet())
             {
-              oprot.writeString(_iter332.getKey());
-              _iter332.getValue().write(oprot);
+              oprot.writeString(_iter292.getKey());
+              _iter292.getValue().write(oprot);
             }
             oprot.writeMapEnd();
           }
@@ -27574,10 +27401,10 @@ public class BoxalinoDataIntelligence {
         if (struct.isSetSuccess()) {
           {
             oprot.writeI32(struct.success.size());
-            for (Map.Entry<String, Choice> _iter333 : struct.success.entrySet())
+            for (Map.Entry<String, Choice> _iter293 : struct.success.entrySet())
             {
-              oprot.writeString(_iter333.getKey());
-              _iter333.getValue().write(oprot);
+              oprot.writeString(_iter293.getKey());
+              _iter293.getValue().write(oprot);
             }
           }
         }
@@ -27592,16 +27419,16 @@ public class BoxalinoDataIntelligence {
         BitSet incoming = iprot.readBitSet(2);
         if (incoming.get(0)) {
           {
-            org.apache.thrift.protocol.TMap _map334 = new org.apache.thrift.protocol.TMap(org.apache.thrift.protocol.TType.STRING, org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
-            struct.success = new HashMap<String,Choice>(2*_map334.size);
-            String _key335;
-            Choice _val336;
-            for (int _i337 = 0; _i337 < _map334.size; ++_i337)
+            org.apache.thrift.protocol.TMap _map294 = new org.apache.thrift.protocol.TMap(org.apache.thrift.protocol.TType.STRING, org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
+            struct.success = new HashMap<String,Choice>(2*_map294.size);
+            String _key295;
+            Choice _val296;
+            for (int _i297 = 0; _i297 < _map294.size; ++_i297)
             {
-              _key335 = iprot.readString();
-              _val336 = new Choice();
-              _val336.read(iprot);
-              struct.success.put(_key335, _val336);
+              _key295 = iprot.readString();
+              _val296 = new Choice();
+              _val296.read(iprot);
+              struct.success.put(_key295, _val296);
             }
           }
           struct.setSuccessIsSet(true);
@@ -31857,16 +31684,16 @@ public class BoxalinoDataIntelligence {
             case 0: // SUCCESS
               if (schemeField.type == org.apache.thrift.protocol.TType.MAP) {
                 {
-                  org.apache.thrift.protocol.TMap _map338 = iprot.readMapBegin();
-                  struct.success = new HashMap<String,ChoiceVariant>(2*_map338.size);
-                  String _key339;
-                  ChoiceVariant _val340;
-                  for (int _i341 = 0; _i341 < _map338.size; ++_i341)
+                  org.apache.thrift.protocol.TMap _map298 = iprot.readMapBegin();
+                  struct.success = new HashMap<String,ChoiceVariant>(2*_map298.size);
+                  String _key299;
+                  ChoiceVariant _val300;
+                  for (int _i301 = 0; _i301 < _map298.size; ++_i301)
                   {
-                    _key339 = iprot.readString();
-                    _val340 = new ChoiceVariant();
-                    _val340.read(iprot);
-                    struct.success.put(_key339, _val340);
+                    _key299 = iprot.readString();
+                    _val300 = new ChoiceVariant();
+                    _val300.read(iprot);
+                    struct.success.put(_key299, _val300);
                   }
                   iprot.readMapEnd();
                 }
@@ -31903,10 +31730,10 @@ public class BoxalinoDataIntelligence {
           oprot.writeFieldBegin(SUCCESS_FIELD_DESC);
           {
             oprot.writeMapBegin(new org.apache.thrift.protocol.TMap(org.apache.thrift.protocol.TType.STRING, org.apache.thrift.protocol.TType.STRUCT, struct.success.size()));
-            for (Map.Entry<String, ChoiceVariant> _iter342 : struct.success.entrySet())
+            for (Map.Entry<String, ChoiceVariant> _iter302 : struct.success.entrySet())
             {
-              oprot.writeString(_iter342.getKey());
-              _iter342.getValue().write(oprot);
+              oprot.writeString(_iter302.getKey());
+              _iter302.getValue().write(oprot);
             }
             oprot.writeMapEnd();
           }
@@ -31945,10 +31772,10 @@ public class BoxalinoDataIntelligence {
         if (struct.isSetSuccess()) {
           {
             oprot.writeI32(struct.success.size());
-            for (Map.Entry<String, ChoiceVariant> _iter343 : struct.success.entrySet())
+            for (Map.Entry<String, ChoiceVariant> _iter303 : struct.success.entrySet())
             {
-              oprot.writeString(_iter343.getKey());
-              _iter343.getValue().write(oprot);
+              oprot.writeString(_iter303.getKey());
+              _iter303.getValue().write(oprot);
             }
           }
         }
@@ -31963,16 +31790,16 @@ public class BoxalinoDataIntelligence {
         BitSet incoming = iprot.readBitSet(2);
         if (incoming.get(0)) {
           {
-            org.apache.thrift.protocol.TMap _map344 = new org.apache.thrift.protocol.TMap(org.apache.thrift.protocol.TType.STRING, org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
-            struct.success = new HashMap<String,ChoiceVariant>(2*_map344.size);
-            String _key345;
-            ChoiceVariant _val346;
-            for (int _i347 = 0; _i347 < _map344.size; ++_i347)
+            org.apache.thrift.protocol.TMap _map304 = new org.apache.thrift.protocol.TMap(org.apache.thrift.protocol.TType.STRING, org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
+            struct.success = new HashMap<String,ChoiceVariant>(2*_map304.size);
+            String _key305;
+            ChoiceVariant _val306;
+            for (int _i307 = 0; _i307 < _map304.size; ++_i307)
             {
-              _key345 = iprot.readString();
-              _val346 = new ChoiceVariant();
-              _val346.read(iprot);
-              struct.success.put(_key345, _val346);
+              _key305 = iprot.readString();
+              _val306 = new ChoiceVariant();
+              _val306.read(iprot);
+              struct.success.put(_key305, _val306);
             }
           }
           struct.setSuccessIsSet(true);
@@ -37387,14 +37214,14 @@ public class BoxalinoDataIntelligence {
             case 0: // SUCCESS
               if (schemeField.type == org.apache.thrift.protocol.TType.LIST) {
                 {
-                  org.apache.thrift.protocol.TList _list348 = iprot.readListBegin();
-                  struct.success = new ArrayList<ConfigurationDifference>(_list348.size);
-                  ConfigurationDifference _elem349;
-                  for (int _i350 = 0; _i350 < _list348.size; ++_i350)
+                  org.apache.thrift.protocol.TList _list308 = iprot.readListBegin();
+                  struct.success = new ArrayList<ConfigurationDifference>(_list308.size);
+                  ConfigurationDifference _elem309;
+                  for (int _i310 = 0; _i310 < _list308.size; ++_i310)
                   {
-                    _elem349 = new ConfigurationDifference();
-                    _elem349.read(iprot);
-                    struct.success.add(_elem349);
+                    _elem309 = new ConfigurationDifference();
+                    _elem309.read(iprot);
+                    struct.success.add(_elem309);
                   }
                   iprot.readListEnd();
                 }
@@ -37431,9 +37258,9 @@ public class BoxalinoDataIntelligence {
           oprot.writeFieldBegin(SUCCESS_FIELD_DESC);
           {
             oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, struct.success.size()));
-            for (ConfigurationDifference _iter351 : struct.success)
+            for (ConfigurationDifference _iter311 : struct.success)
             {
-              _iter351.write(oprot);
+              _iter311.write(oprot);
             }
             oprot.writeListEnd();
           }
@@ -37472,9 +37299,9 @@ public class BoxalinoDataIntelligence {
         if (struct.isSetSuccess()) {
           {
             oprot.writeI32(struct.success.size());
-            for (ConfigurationDifference _iter352 : struct.success)
+            for (ConfigurationDifference _iter312 : struct.success)
             {
-              _iter352.write(oprot);
+              _iter312.write(oprot);
             }
           }
         }
@@ -37489,14 +37316,14 @@ public class BoxalinoDataIntelligence {
         BitSet incoming = iprot.readBitSet(2);
         if (incoming.get(0)) {
           {
-            org.apache.thrift.protocol.TList _list353 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
-            struct.success = new ArrayList<ConfigurationDifference>(_list353.size);
-            ConfigurationDifference _elem354;
-            for (int _i355 = 0; _i355 < _list353.size; ++_i355)
+            org.apache.thrift.protocol.TList _list313 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
+            struct.success = new ArrayList<ConfigurationDifference>(_list313.size);
+            ConfigurationDifference _elem314;
+            for (int _i315 = 0; _i315 < _list313.size; ++_i315)
             {
-              _elem354 = new ConfigurationDifference();
-              _elem354.read(iprot);
-              struct.success.add(_elem354);
+              _elem314 = new ConfigurationDifference();
+              _elem314.read(iprot);
+              struct.success.add(_elem314);
             }
           }
           struct.setSuccessIsSet(true);
@@ -43020,14 +42847,14 @@ public class BoxalinoDataIntelligence {
             case 0: // SUCCESS
               if (schemeField.type == org.apache.thrift.protocol.TType.LIST) {
                 {
-                  org.apache.thrift.protocol.TList _list356 = iprot.readListBegin();
-                  struct.success = new ArrayList<ReferenceCSVFileDescriptor>(_list356.size);
-                  ReferenceCSVFileDescriptor _elem357;
-                  for (int _i358 = 0; _i358 < _list356.size; ++_i358)
+                  org.apache.thrift.protocol.TList _list316 = iprot.readListBegin();
+                  struct.success = new ArrayList<ReferenceCSVFileDescriptor>(_list316.size);
+                  ReferenceCSVFileDescriptor _elem317;
+                  for (int _i318 = 0; _i318 < _list316.size; ++_i318)
                   {
-                    _elem357 = new ReferenceCSVFileDescriptor();
-                    _elem357.read(iprot);
-                    struct.success.add(_elem357);
+                    _elem317 = new ReferenceCSVFileDescriptor();
+                    _elem317.read(iprot);
+                    struct.success.add(_elem317);
                   }
                   iprot.readListEnd();
                 }
@@ -43064,9 +42891,9 @@ public class BoxalinoDataIntelligence {
           oprot.writeFieldBegin(SUCCESS_FIELD_DESC);
           {
             oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, struct.success.size()));
-            for (ReferenceCSVFileDescriptor _iter359 : struct.success)
+            for (ReferenceCSVFileDescriptor _iter319 : struct.success)
             {
-              _iter359.write(oprot);
+              _iter319.write(oprot);
             }
             oprot.writeListEnd();
           }
@@ -43105,9 +42932,9 @@ public class BoxalinoDataIntelligence {
         if (struct.isSetSuccess()) {
           {
             oprot.writeI32(struct.success.size());
-            for (ReferenceCSVFileDescriptor _iter360 : struct.success)
+            for (ReferenceCSVFileDescriptor _iter320 : struct.success)
             {
-              _iter360.write(oprot);
+              _iter320.write(oprot);
             }
           }
         }
@@ -43122,14 +42949,14 @@ public class BoxalinoDataIntelligence {
         BitSet incoming = iprot.readBitSet(2);
         if (incoming.get(0)) {
           {
-            org.apache.thrift.protocol.TList _list361 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
-            struct.success = new ArrayList<ReferenceCSVFileDescriptor>(_list361.size);
-            ReferenceCSVFileDescriptor _elem362;
-            for (int _i363 = 0; _i363 < _list361.size; ++_i363)
+            org.apache.thrift.protocol.TList _list321 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
+            struct.success = new ArrayList<ReferenceCSVFileDescriptor>(_list321.size);
+            ReferenceCSVFileDescriptor _elem322;
+            for (int _i323 = 0; _i323 < _list321.size; ++_i323)
             {
-              _elem362 = new ReferenceCSVFileDescriptor();
-              _elem362.read(iprot);
-              struct.success.add(_elem362);
+              _elem322 = new ReferenceCSVFileDescriptor();
+              _elem322.read(iprot);
+              struct.success.add(_elem322);
             }
           }
           struct.setSuccessIsSet(true);
@@ -44967,16 +44794,16 @@ public class BoxalinoDataIntelligence {
             case 0: // SUCCESS
               if (schemeField.type == org.apache.thrift.protocol.TType.MAP) {
                 {
-                  org.apache.thrift.protocol.TMap _map364 = iprot.readMapBegin();
-                  struct.success = new HashMap<String,Scheduling>(2*_map364.size);
-                  String _key365;
-                  Scheduling _val366;
-                  for (int _i367 = 0; _i367 < _map364.size; ++_i367)
+                  org.apache.thrift.protocol.TMap _map324 = iprot.readMapBegin();
+                  struct.success = new HashMap<String,Scheduling>(2*_map324.size);
+                  String _key325;
+                  Scheduling _val326;
+                  for (int _i327 = 0; _i327 < _map324.size; ++_i327)
                   {
-                    _key365 = iprot.readString();
-                    _val366 = new Scheduling();
-                    _val366.read(iprot);
-                    struct.success.put(_key365, _val366);
+                    _key325 = iprot.readString();
+                    _val326 = new Scheduling();
+                    _val326.read(iprot);
+                    struct.success.put(_key325, _val326);
                   }
                   iprot.readMapEnd();
                 }
@@ -45013,10 +44840,10 @@ public class BoxalinoDataIntelligence {
           oprot.writeFieldBegin(SUCCESS_FIELD_DESC);
           {
             oprot.writeMapBegin(new org.apache.thrift.protocol.TMap(org.apache.thrift.protocol.TType.STRING, org.apache.thrift.protocol.TType.STRUCT, struct.success.size()));
-            for (Map.Entry<String, Scheduling> _iter368 : struct.success.entrySet())
+            for (Map.Entry<String, Scheduling> _iter328 : struct.success.entrySet())
             {
-              oprot.writeString(_iter368.getKey());
-              _iter368.getValue().write(oprot);
+              oprot.writeString(_iter328.getKey());
+              _iter328.getValue().write(oprot);
             }
             oprot.writeMapEnd();
           }
@@ -45055,10 +44882,10 @@ public class BoxalinoDataIntelligence {
         if (struct.isSetSuccess()) {
           {
             oprot.writeI32(struct.success.size());
-            for (Map.Entry<String, Scheduling> _iter369 : struct.success.entrySet())
+            for (Map.Entry<String, Scheduling> _iter329 : struct.success.entrySet())
             {
-              oprot.writeString(_iter369.getKey());
-              _iter369.getValue().write(oprot);
+              oprot.writeString(_iter329.getKey());
+              _iter329.getValue().write(oprot);
             }
           }
         }
@@ -45073,16 +44900,16 @@ public class BoxalinoDataIntelligence {
         BitSet incoming = iprot.readBitSet(2);
         if (incoming.get(0)) {
           {
-            org.apache.thrift.protocol.TMap _map370 = new org.apache.thrift.protocol.TMap(org.apache.thrift.protocol.TType.STRING, org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
-            struct.success = new HashMap<String,Scheduling>(2*_map370.size);
-            String _key371;
-            Scheduling _val372;
-            for (int _i373 = 0; _i373 < _map370.size; ++_i373)
+            org.apache.thrift.protocol.TMap _map330 = new org.apache.thrift.protocol.TMap(org.apache.thrift.protocol.TType.STRING, org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
+            struct.success = new HashMap<String,Scheduling>(2*_map330.size);
+            String _key331;
+            Scheduling _val332;
+            for (int _i333 = 0; _i333 < _map330.size; ++_i333)
             {
-              _key371 = iprot.readString();
-              _val372 = new Scheduling();
-              _val372.read(iprot);
-              struct.success.put(_key371, _val372);
+              _key331 = iprot.readString();
+              _val332 = new Scheduling();
+              _val332.read(iprot);
+              struct.success.put(_key331, _val332);
             }
           }
           struct.setSuccessIsSet(true);
@@ -49762,16 +49589,16 @@ public class BoxalinoDataIntelligence {
             case 0: // SUCCESS
               if (schemeField.type == org.apache.thrift.protocol.TType.MAP) {
                 {
-                  org.apache.thrift.protocol.TMap _map374 = iprot.readMapBegin();
-                  struct.success = new HashMap<String,RecommendationBlock>(2*_map374.size);
-                  String _key375;
-                  RecommendationBlock _val376;
-                  for (int _i377 = 0; _i377 < _map374.size; ++_i377)
+                  org.apache.thrift.protocol.TMap _map334 = iprot.readMapBegin();
+                  struct.success = new HashMap<String,RecommendationBlock>(2*_map334.size);
+                  String _key335;
+                  RecommendationBlock _val336;
+                  for (int _i337 = 0; _i337 < _map334.size; ++_i337)
                   {
-                    _key375 = iprot.readString();
-                    _val376 = new RecommendationBlock();
-                    _val376.read(iprot);
-                    struct.success.put(_key375, _val376);
+                    _key335 = iprot.readString();
+                    _val336 = new RecommendationBlock();
+                    _val336.read(iprot);
+                    struct.success.put(_key335, _val336);
                   }
                   iprot.readMapEnd();
                 }
@@ -49808,10 +49635,10 @@ public class BoxalinoDataIntelligence {
           oprot.writeFieldBegin(SUCCESS_FIELD_DESC);
           {
             oprot.writeMapBegin(new org.apache.thrift.protocol.TMap(org.apache.thrift.protocol.TType.STRING, org.apache.thrift.protocol.TType.STRUCT, struct.success.size()));
-            for (Map.Entry<String, RecommendationBlock> _iter378 : struct.success.entrySet())
+            for (Map.Entry<String, RecommendationBlock> _iter338 : struct.success.entrySet())
             {
-              oprot.writeString(_iter378.getKey());
-              _iter378.getValue().write(oprot);
+              oprot.writeString(_iter338.getKey());
+              _iter338.getValue().write(oprot);
             }
             oprot.writeMapEnd();
           }
@@ -49850,10 +49677,10 @@ public class BoxalinoDataIntelligence {
         if (struct.isSetSuccess()) {
           {
             oprot.writeI32(struct.success.size());
-            for (Map.Entry<String, RecommendationBlock> _iter379 : struct.success.entrySet())
+            for (Map.Entry<String, RecommendationBlock> _iter339 : struct.success.entrySet())
             {
-              oprot.writeString(_iter379.getKey());
-              _iter379.getValue().write(oprot);
+              oprot.writeString(_iter339.getKey());
+              _iter339.getValue().write(oprot);
             }
           }
         }
@@ -49868,16 +49695,16 @@ public class BoxalinoDataIntelligence {
         BitSet incoming = iprot.readBitSet(2);
         if (incoming.get(0)) {
           {
-            org.apache.thrift.protocol.TMap _map380 = new org.apache.thrift.protocol.TMap(org.apache.thrift.protocol.TType.STRING, org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
-            struct.success = new HashMap<String,RecommendationBlock>(2*_map380.size);
-            String _key381;
-            RecommendationBlock _val382;
-            for (int _i383 = 0; _i383 < _map380.size; ++_i383)
+            org.apache.thrift.protocol.TMap _map340 = new org.apache.thrift.protocol.TMap(org.apache.thrift.protocol.TType.STRING, org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
+            struct.success = new HashMap<String,RecommendationBlock>(2*_map340.size);
+            String _key341;
+            RecommendationBlock _val342;
+            for (int _i343 = 0; _i343 < _map340.size; ++_i343)
             {
-              _key381 = iprot.readString();
-              _val382 = new RecommendationBlock();
-              _val382.read(iprot);
-              struct.success.put(_key381, _val382);
+              _key341 = iprot.readString();
+              _val342 = new RecommendationBlock();
+              _val342.read(iprot);
+              struct.success.put(_key341, _val342);
             }
           }
           struct.setSuccessIsSet(true);
@@ -53608,16 +53435,16 @@ public class BoxalinoDataIntelligence {
             case 0: // SUCCESS
               if (schemeField.type == org.apache.thrift.protocol.TType.MAP) {
                 {
-                  org.apache.thrift.protocol.TMap _map384 = iprot.readMapBegin();
-                  struct.success = new HashMap<String,DataSource>(2*_map384.size);
-                  String _key385;
-                  DataSource _val386;
-                  for (int _i387 = 0; _i387 < _map384.size; ++_i387)
+                  org.apache.thrift.protocol.TMap _map344 = iprot.readMapBegin();
+                  struct.success = new HashMap<String,DataSource>(2*_map344.size);
+                  String _key345;
+                  DataSource _val346;
+                  for (int _i347 = 0; _i347 < _map344.size; ++_i347)
                   {
-                    _key385 = iprot.readString();
-                    _val386 = new DataSource();
-                    _val386.read(iprot);
-                    struct.success.put(_key385, _val386);
+                    _key345 = iprot.readString();
+                    _val346 = new DataSource();
+                    _val346.read(iprot);
+                    struct.success.put(_key345, _val346);
                   }
                   iprot.readMapEnd();
                 }
@@ -53654,10 +53481,10 @@ public class BoxalinoDataIntelligence {
           oprot.writeFieldBegin(SUCCESS_FIELD_DESC);
           {
             oprot.writeMapBegin(new org.apache.thrift.protocol.TMap(org.apache.thrift.protocol.TType.STRING, org.apache.thrift.protocol.TType.STRUCT, struct.success.size()));
-            for (Map.Entry<String, DataSource> _iter388 : struct.success.entrySet())
+            for (Map.Entry<String, DataSource> _iter348 : struct.success.entrySet())
             {
-              oprot.writeString(_iter388.getKey());
-              _iter388.getValue().write(oprot);
+              oprot.writeString(_iter348.getKey());
+              _iter348.getValue().write(oprot);
             }
             oprot.writeMapEnd();
           }
@@ -53696,10 +53523,10 @@ public class BoxalinoDataIntelligence {
         if (struct.isSetSuccess()) {
           {
             oprot.writeI32(struct.success.size());
-            for (Map.Entry<String, DataSource> _iter389 : struct.success.entrySet())
+            for (Map.Entry<String, DataSource> _iter349 : struct.success.entrySet())
             {
-              oprot.writeString(_iter389.getKey());
-              _iter389.getValue().write(oprot);
+              oprot.writeString(_iter349.getKey());
+              _iter349.getValue().write(oprot);
             }
           }
         }
@@ -53714,16 +53541,16 @@ public class BoxalinoDataIntelligence {
         BitSet incoming = iprot.readBitSet(2);
         if (incoming.get(0)) {
           {
-            org.apache.thrift.protocol.TMap _map390 = new org.apache.thrift.protocol.TMap(org.apache.thrift.protocol.TType.STRING, org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
-            struct.success = new HashMap<String,DataSource>(2*_map390.size);
-            String _key391;
-            DataSource _val392;
-            for (int _i393 = 0; _i393 < _map390.size; ++_i393)
+            org.apache.thrift.protocol.TMap _map350 = new org.apache.thrift.protocol.TMap(org.apache.thrift.protocol.TType.STRING, org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
+            struct.success = new HashMap<String,DataSource>(2*_map350.size);
+            String _key351;
+            DataSource _val352;
+            for (int _i353 = 0; _i353 < _map350.size; ++_i353)
             {
-              _key391 = iprot.readString();
-              _val392 = new DataSource();
-              _val392.read(iprot);
-              struct.success.put(_key391, _val392);
+              _key351 = iprot.readString();
+              _val352 = new DataSource();
+              _val352.read(iprot);
+              struct.success.put(_key351, _val352);
             }
           }
           struct.setSuccessIsSet(true);
@@ -57454,16 +57281,16 @@ public class BoxalinoDataIntelligence {
             case 0: // SUCCESS
               if (schemeField.type == org.apache.thrift.protocol.TType.MAP) {
                 {
-                  org.apache.thrift.protocol.TMap _map394 = iprot.readMapBegin();
-                  struct.success = new HashMap<String,DataExport>(2*_map394.size);
-                  String _key395;
-                  DataExport _val396;
-                  for (int _i397 = 0; _i397 < _map394.size; ++_i397)
+                  org.apache.thrift.protocol.TMap _map354 = iprot.readMapBegin();
+                  struct.success = new HashMap<String,DataExport>(2*_map354.size);
+                  String _key355;
+                  DataExport _val356;
+                  for (int _i357 = 0; _i357 < _map354.size; ++_i357)
                   {
-                    _key395 = iprot.readString();
-                    _val396 = new DataExport();
-                    _val396.read(iprot);
-                    struct.success.put(_key395, _val396);
+                    _key355 = iprot.readString();
+                    _val356 = new DataExport();
+                    _val356.read(iprot);
+                    struct.success.put(_key355, _val356);
                   }
                   iprot.readMapEnd();
                 }
@@ -57500,10 +57327,10 @@ public class BoxalinoDataIntelligence {
           oprot.writeFieldBegin(SUCCESS_FIELD_DESC);
           {
             oprot.writeMapBegin(new org.apache.thrift.protocol.TMap(org.apache.thrift.protocol.TType.STRING, org.apache.thrift.protocol.TType.STRUCT, struct.success.size()));
-            for (Map.Entry<String, DataExport> _iter398 : struct.success.entrySet())
+            for (Map.Entry<String, DataExport> _iter358 : struct.success.entrySet())
             {
-              oprot.writeString(_iter398.getKey());
-              _iter398.getValue().write(oprot);
+              oprot.writeString(_iter358.getKey());
+              _iter358.getValue().write(oprot);
             }
             oprot.writeMapEnd();
           }
@@ -57542,10 +57369,10 @@ public class BoxalinoDataIntelligence {
         if (struct.isSetSuccess()) {
           {
             oprot.writeI32(struct.success.size());
-            for (Map.Entry<String, DataExport> _iter399 : struct.success.entrySet())
+            for (Map.Entry<String, DataExport> _iter359 : struct.success.entrySet())
             {
-              oprot.writeString(_iter399.getKey());
-              _iter399.getValue().write(oprot);
+              oprot.writeString(_iter359.getKey());
+              _iter359.getValue().write(oprot);
             }
           }
         }
@@ -57560,16 +57387,16 @@ public class BoxalinoDataIntelligence {
         BitSet incoming = iprot.readBitSet(2);
         if (incoming.get(0)) {
           {
-            org.apache.thrift.protocol.TMap _map400 = new org.apache.thrift.protocol.TMap(org.apache.thrift.protocol.TType.STRING, org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
-            struct.success = new HashMap<String,DataExport>(2*_map400.size);
-            String _key401;
-            DataExport _val402;
-            for (int _i403 = 0; _i403 < _map400.size; ++_i403)
+            org.apache.thrift.protocol.TMap _map360 = new org.apache.thrift.protocol.TMap(org.apache.thrift.protocol.TType.STRING, org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
+            struct.success = new HashMap<String,DataExport>(2*_map360.size);
+            String _key361;
+            DataExport _val362;
+            for (int _i363 = 0; _i363 < _map360.size; ++_i363)
             {
-              _key401 = iprot.readString();
-              _val402 = new DataExport();
-              _val402.read(iprot);
-              struct.success.put(_key401, _val402);
+              _key361 = iprot.readString();
+              _val362 = new DataExport();
+              _val362.read(iprot);
+              struct.success.put(_key361, _val362);
             }
           }
           struct.setSuccessIsSet(true);
@@ -61300,16 +61127,16 @@ public class BoxalinoDataIntelligence {
             case 0: // SUCCESS
               if (schemeField.type == org.apache.thrift.protocol.TType.MAP) {
                 {
-                  org.apache.thrift.protocol.TMap _map404 = iprot.readMapBegin();
-                  struct.success = new HashMap<String,ReferenceCSVDataSource>(2*_map404.size);
-                  String _key405;
-                  ReferenceCSVDataSource _val406;
-                  for (int _i407 = 0; _i407 < _map404.size; ++_i407)
+                  org.apache.thrift.protocol.TMap _map364 = iprot.readMapBegin();
+                  struct.success = new HashMap<String,ReferenceCSVDataSource>(2*_map364.size);
+                  String _key365;
+                  ReferenceCSVDataSource _val366;
+                  for (int _i367 = 0; _i367 < _map364.size; ++_i367)
                   {
-                    _key405 = iprot.readString();
-                    _val406 = new ReferenceCSVDataSource();
-                    _val406.read(iprot);
-                    struct.success.put(_key405, _val406);
+                    _key365 = iprot.readString();
+                    _val366 = new ReferenceCSVDataSource();
+                    _val366.read(iprot);
+                    struct.success.put(_key365, _val366);
                   }
                   iprot.readMapEnd();
                 }
@@ -61346,10 +61173,10 @@ public class BoxalinoDataIntelligence {
           oprot.writeFieldBegin(SUCCESS_FIELD_DESC);
           {
             oprot.writeMapBegin(new org.apache.thrift.protocol.TMap(org.apache.thrift.protocol.TType.STRING, org.apache.thrift.protocol.TType.STRUCT, struct.success.size()));
-            for (Map.Entry<String, ReferenceCSVDataSource> _iter408 : struct.success.entrySet())
+            for (Map.Entry<String, ReferenceCSVDataSource> _iter368 : struct.success.entrySet())
             {
-              oprot.writeString(_iter408.getKey());
-              _iter408.getValue().write(oprot);
+              oprot.writeString(_iter368.getKey());
+              _iter368.getValue().write(oprot);
             }
             oprot.writeMapEnd();
           }
@@ -61388,10 +61215,10 @@ public class BoxalinoDataIntelligence {
         if (struct.isSetSuccess()) {
           {
             oprot.writeI32(struct.success.size());
-            for (Map.Entry<String, ReferenceCSVDataSource> _iter409 : struct.success.entrySet())
+            for (Map.Entry<String, ReferenceCSVDataSource> _iter369 : struct.success.entrySet())
             {
-              oprot.writeString(_iter409.getKey());
-              _iter409.getValue().write(oprot);
+              oprot.writeString(_iter369.getKey());
+              _iter369.getValue().write(oprot);
             }
           }
         }
@@ -61406,16 +61233,16 @@ public class BoxalinoDataIntelligence {
         BitSet incoming = iprot.readBitSet(2);
         if (incoming.get(0)) {
           {
-            org.apache.thrift.protocol.TMap _map410 = new org.apache.thrift.protocol.TMap(org.apache.thrift.protocol.TType.STRING, org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
-            struct.success = new HashMap<String,ReferenceCSVDataSource>(2*_map410.size);
-            String _key411;
-            ReferenceCSVDataSource _val412;
-            for (int _i413 = 0; _i413 < _map410.size; ++_i413)
+            org.apache.thrift.protocol.TMap _map370 = new org.apache.thrift.protocol.TMap(org.apache.thrift.protocol.TType.STRING, org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
+            struct.success = new HashMap<String,ReferenceCSVDataSource>(2*_map370.size);
+            String _key371;
+            ReferenceCSVDataSource _val372;
+            for (int _i373 = 0; _i373 < _map370.size; ++_i373)
             {
-              _key411 = iprot.readString();
-              _val412 = new ReferenceCSVDataSource();
-              _val412.read(iprot);
-              struct.success.put(_key411, _val412);
+              _key371 = iprot.readString();
+              _val372 = new ReferenceCSVDataSource();
+              _val372.read(iprot);
+              struct.success.put(_key371, _val372);
             }
           }
           struct.setSuccessIsSet(true);
@@ -66316,14 +66143,14 @@ public class BoxalinoDataIntelligence {
             case 0: // SUCCESS
               if (schemeField.type == org.apache.thrift.protocol.TType.LIST) {
                 {
-                  org.apache.thrift.protocol.TList _list414 = iprot.readListBegin();
-                  struct.success = new ArrayList<TimeRangeValue>(_list414.size);
-                  TimeRangeValue _elem415;
-                  for (int _i416 = 0; _i416 < _list414.size; ++_i416)
+                  org.apache.thrift.protocol.TList _list374 = iprot.readListBegin();
+                  struct.success = new ArrayList<TimeRangeValue>(_list374.size);
+                  TimeRangeValue _elem375;
+                  for (int _i376 = 0; _i376 < _list374.size; ++_i376)
                   {
-                    _elem415 = new TimeRangeValue();
-                    _elem415.read(iprot);
-                    struct.success.add(_elem415);
+                    _elem375 = new TimeRangeValue();
+                    _elem375.read(iprot);
+                    struct.success.add(_elem375);
                   }
                   iprot.readListEnd();
                 }
@@ -66360,9 +66187,9 @@ public class BoxalinoDataIntelligence {
           oprot.writeFieldBegin(SUCCESS_FIELD_DESC);
           {
             oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, struct.success.size()));
-            for (TimeRangeValue _iter417 : struct.success)
+            for (TimeRangeValue _iter377 : struct.success)
             {
-              _iter417.write(oprot);
+              _iter377.write(oprot);
             }
             oprot.writeListEnd();
           }
@@ -66401,9 +66228,9 @@ public class BoxalinoDataIntelligence {
         if (struct.isSetSuccess()) {
           {
             oprot.writeI32(struct.success.size());
-            for (TimeRangeValue _iter418 : struct.success)
+            for (TimeRangeValue _iter378 : struct.success)
             {
-              _iter418.write(oprot);
+              _iter378.write(oprot);
             }
           }
         }
@@ -66418,1075 +66245,16 @@ public class BoxalinoDataIntelligence {
         BitSet incoming = iprot.readBitSet(2);
         if (incoming.get(0)) {
           {
-            org.apache.thrift.protocol.TList _list419 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
-            struct.success = new ArrayList<TimeRangeValue>(_list419.size);
-            TimeRangeValue _elem420;
-            for (int _i421 = 0; _i421 < _list419.size; ++_i421)
+            org.apache.thrift.protocol.TList _list379 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
+            struct.success = new ArrayList<TimeRangeValue>(_list379.size);
+            TimeRangeValue _elem380;
+            for (int _i381 = 0; _i381 < _list379.size; ++_i381)
             {
-              _elem420 = new TimeRangeValue();
-              _elem420.read(iprot);
-              struct.success.add(_elem420);
+              _elem380 = new TimeRangeValue();
+              _elem380.read(iprot);
+              struct.success.add(_elem380);
             }
           }
-          struct.setSuccessIsSet(true);
-        }
-        if (incoming.get(1)) {
-          struct.e = new DataIntelligenceServiceException();
-          struct.e.read(iprot);
-          struct.setEIsSet(true);
-        }
-      }
-    }
-
-  }
-
-  public static class GetChoiceReport_args implements org.apache.thrift.TBase<GetChoiceReport_args, GetChoiceReport_args._Fields>, java.io.Serializable, Cloneable, Comparable<GetChoiceReport_args>   {
-    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("GetChoiceReport_args");
-
-    private static final org.apache.thrift.protocol.TField AUTHENTICATION_FIELD_DESC = new org.apache.thrift.protocol.TField("authentication", org.apache.thrift.protocol.TType.STRUCT, (short)1);
-    private static final org.apache.thrift.protocol.TField CONFIGURATION_FIELD_DESC = new org.apache.thrift.protocol.TField("configuration", org.apache.thrift.protocol.TType.STRUCT, (short)2);
-    private static final org.apache.thrift.protocol.TField REQUEST_FIELD_DESC = new org.apache.thrift.protocol.TField("request", org.apache.thrift.protocol.TType.STRUCT, (short)3);
-
-    private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
-    static {
-      schemes.put(StandardScheme.class, new GetChoiceReport_argsStandardSchemeFactory());
-      schemes.put(TupleScheme.class, new GetChoiceReport_argsTupleSchemeFactory());
-    }
-
-    public Authentication authentication; // required
-    public ConfigurationVersion configuration; // required
-    public ChoiceReportRequest request; // required
-
-    /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
-    public enum _Fields implements org.apache.thrift.TFieldIdEnum {
-      AUTHENTICATION((short)1, "authentication"),
-      CONFIGURATION((short)2, "configuration"),
-      REQUEST((short)3, "request");
-
-      private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
-
-      static {
-        for (_Fields field : EnumSet.allOf(_Fields.class)) {
-          byName.put(field.getFieldName(), field);
-        }
-      }
-
-      /**
-       * Find the _Fields constant that matches fieldId, or null if its not found.
-       */
-      public static _Fields findByThriftId(int fieldId) {
-        switch(fieldId) {
-          case 1: // AUTHENTICATION
-            return AUTHENTICATION;
-          case 2: // CONFIGURATION
-            return CONFIGURATION;
-          case 3: // REQUEST
-            return REQUEST;
-          default:
-            return null;
-        }
-      }
-
-      /**
-       * Find the _Fields constant that matches fieldId, throwing an exception
-       * if it is not found.
-       */
-      public static _Fields findByThriftIdOrThrow(int fieldId) {
-        _Fields fields = findByThriftId(fieldId);
-        if (fields == null) throw new IllegalArgumentException("Field " + fieldId + " doesn't exist!");
-        return fields;
-      }
-
-      /**
-       * Find the _Fields constant that matches name, or null if its not found.
-       */
-      public static _Fields findByName(String name) {
-        return byName.get(name);
-      }
-
-      private final short _thriftId;
-      private final String _fieldName;
-
-      _Fields(short thriftId, String fieldName) {
-        _thriftId = thriftId;
-        _fieldName = fieldName;
-      }
-
-      public short getThriftFieldId() {
-        return _thriftId;
-      }
-
-      public String getFieldName() {
-        return _fieldName;
-      }
-    }
-
-    // isset id assignments
-    public static final Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
-    static {
-      Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
-      tmpMap.put(_Fields.AUTHENTICATION, new org.apache.thrift.meta_data.FieldMetaData("authentication", org.apache.thrift.TFieldRequirementType.DEFAULT, 
-          new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, Authentication.class)));
-      tmpMap.put(_Fields.CONFIGURATION, new org.apache.thrift.meta_data.FieldMetaData("configuration", org.apache.thrift.TFieldRequirementType.DEFAULT, 
-          new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, ConfigurationVersion.class)));
-      tmpMap.put(_Fields.REQUEST, new org.apache.thrift.meta_data.FieldMetaData("request", org.apache.thrift.TFieldRequirementType.DEFAULT, 
-          new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, ChoiceReportRequest.class)));
-      metaDataMap = Collections.unmodifiableMap(tmpMap);
-      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(GetChoiceReport_args.class, metaDataMap);
-    }
-
-    public GetChoiceReport_args() {
-    }
-
-    public GetChoiceReport_args(
-      Authentication authentication,
-      ConfigurationVersion configuration,
-      ChoiceReportRequest request)
-    {
-      this();
-      this.authentication = authentication;
-      this.configuration = configuration;
-      this.request = request;
-    }
-
-    /**
-     * Performs a deep copy on <i>other</i>.
-     */
-    public GetChoiceReport_args(GetChoiceReport_args other) {
-      if (other.isSetAuthentication()) {
-        this.authentication = new Authentication(other.authentication);
-      }
-      if (other.isSetConfiguration()) {
-        this.configuration = new ConfigurationVersion(other.configuration);
-      }
-      if (other.isSetRequest()) {
-        this.request = new ChoiceReportRequest(other.request);
-      }
-    }
-
-    public GetChoiceReport_args deepCopy() {
-      return new GetChoiceReport_args(this);
-    }
-
-    @Override
-    public void clear() {
-      this.authentication = null;
-      this.configuration = null;
-      this.request = null;
-    }
-
-    public Authentication getAuthentication() {
-      return this.authentication;
-    }
-
-    public GetChoiceReport_args setAuthentication(Authentication authentication) {
-      this.authentication = authentication;
-      return this;
-    }
-
-    public void unsetAuthentication() {
-      this.authentication = null;
-    }
-
-    /** Returns true if field authentication is set (has been assigned a value) and false otherwise */
-    public boolean isSetAuthentication() {
-      return this.authentication != null;
-    }
-
-    public void setAuthenticationIsSet(boolean value) {
-      if (!value) {
-        this.authentication = null;
-      }
-    }
-
-    public ConfigurationVersion getConfiguration() {
-      return this.configuration;
-    }
-
-    public GetChoiceReport_args setConfiguration(ConfigurationVersion configuration) {
-      this.configuration = configuration;
-      return this;
-    }
-
-    public void unsetConfiguration() {
-      this.configuration = null;
-    }
-
-    /** Returns true if field configuration is set (has been assigned a value) and false otherwise */
-    public boolean isSetConfiguration() {
-      return this.configuration != null;
-    }
-
-    public void setConfigurationIsSet(boolean value) {
-      if (!value) {
-        this.configuration = null;
-      }
-    }
-
-    public ChoiceReportRequest getRequest() {
-      return this.request;
-    }
-
-    public GetChoiceReport_args setRequest(ChoiceReportRequest request) {
-      this.request = request;
-      return this;
-    }
-
-    public void unsetRequest() {
-      this.request = null;
-    }
-
-    /** Returns true if field request is set (has been assigned a value) and false otherwise */
-    public boolean isSetRequest() {
-      return this.request != null;
-    }
-
-    public void setRequestIsSet(boolean value) {
-      if (!value) {
-        this.request = null;
-      }
-    }
-
-    public void setFieldValue(_Fields field, Object value) {
-      switch (field) {
-      case AUTHENTICATION:
-        if (value == null) {
-          unsetAuthentication();
-        } else {
-          setAuthentication((Authentication)value);
-        }
-        break;
-
-      case CONFIGURATION:
-        if (value == null) {
-          unsetConfiguration();
-        } else {
-          setConfiguration((ConfigurationVersion)value);
-        }
-        break;
-
-      case REQUEST:
-        if (value == null) {
-          unsetRequest();
-        } else {
-          setRequest((ChoiceReportRequest)value);
-        }
-        break;
-
-      }
-    }
-
-    public Object getFieldValue(_Fields field) {
-      switch (field) {
-      case AUTHENTICATION:
-        return getAuthentication();
-
-      case CONFIGURATION:
-        return getConfiguration();
-
-      case REQUEST:
-        return getRequest();
-
-      }
-      throw new IllegalStateException();
-    }
-
-    /** Returns true if field corresponding to fieldID is set (has been assigned a value) and false otherwise */
-    public boolean isSet(_Fields field) {
-      if (field == null) {
-        throw new IllegalArgumentException();
-      }
-
-      switch (field) {
-      case AUTHENTICATION:
-        return isSetAuthentication();
-      case CONFIGURATION:
-        return isSetConfiguration();
-      case REQUEST:
-        return isSetRequest();
-      }
-      throw new IllegalStateException();
-    }
-
-    @Override
-    public boolean equals(Object that) {
-      if (that == null)
-        return false;
-      if (that instanceof GetChoiceReport_args)
-        return this.equals((GetChoiceReport_args)that);
-      return false;
-    }
-
-    public boolean equals(GetChoiceReport_args that) {
-      if (that == null)
-        return false;
-
-      boolean this_present_authentication = true && this.isSetAuthentication();
-      boolean that_present_authentication = true && that.isSetAuthentication();
-      if (this_present_authentication || that_present_authentication) {
-        if (!(this_present_authentication && that_present_authentication))
-          return false;
-        if (!this.authentication.equals(that.authentication))
-          return false;
-      }
-
-      boolean this_present_configuration = true && this.isSetConfiguration();
-      boolean that_present_configuration = true && that.isSetConfiguration();
-      if (this_present_configuration || that_present_configuration) {
-        if (!(this_present_configuration && that_present_configuration))
-          return false;
-        if (!this.configuration.equals(that.configuration))
-          return false;
-      }
-
-      boolean this_present_request = true && this.isSetRequest();
-      boolean that_present_request = true && that.isSetRequest();
-      if (this_present_request || that_present_request) {
-        if (!(this_present_request && that_present_request))
-          return false;
-        if (!this.request.equals(that.request))
-          return false;
-      }
-
-      return true;
-    }
-
-    @Override
-    public int hashCode() {
-      List<Object> list = new ArrayList<Object>();
-
-      boolean present_authentication = true && (isSetAuthentication());
-      list.add(present_authentication);
-      if (present_authentication)
-        list.add(authentication);
-
-      boolean present_configuration = true && (isSetConfiguration());
-      list.add(present_configuration);
-      if (present_configuration)
-        list.add(configuration);
-
-      boolean present_request = true && (isSetRequest());
-      list.add(present_request);
-      if (present_request)
-        list.add(request);
-
-      return list.hashCode();
-    }
-
-    @Override
-    public int compareTo(GetChoiceReport_args other) {
-      if (!getClass().equals(other.getClass())) {
-        return getClass().getName().compareTo(other.getClass().getName());
-      }
-
-      int lastComparison = 0;
-
-      lastComparison = Boolean.valueOf(isSetAuthentication()).compareTo(other.isSetAuthentication());
-      if (lastComparison != 0) {
-        return lastComparison;
-      }
-      if (isSetAuthentication()) {
-        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.authentication, other.authentication);
-        if (lastComparison != 0) {
-          return lastComparison;
-        }
-      }
-      lastComparison = Boolean.valueOf(isSetConfiguration()).compareTo(other.isSetConfiguration());
-      if (lastComparison != 0) {
-        return lastComparison;
-      }
-      if (isSetConfiguration()) {
-        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.configuration, other.configuration);
-        if (lastComparison != 0) {
-          return lastComparison;
-        }
-      }
-      lastComparison = Boolean.valueOf(isSetRequest()).compareTo(other.isSetRequest());
-      if (lastComparison != 0) {
-        return lastComparison;
-      }
-      if (isSetRequest()) {
-        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.request, other.request);
-        if (lastComparison != 0) {
-          return lastComparison;
-        }
-      }
-      return 0;
-    }
-
-    public _Fields fieldForId(int fieldId) {
-      return _Fields.findByThriftId(fieldId);
-    }
-
-    public void read(org.apache.thrift.protocol.TProtocol iprot) throws org.apache.thrift.TException {
-      schemes.get(iprot.getScheme()).getScheme().read(iprot, this);
-    }
-
-    public void write(org.apache.thrift.protocol.TProtocol oprot) throws org.apache.thrift.TException {
-      schemes.get(oprot.getScheme()).getScheme().write(oprot, this);
-    }
-
-    @Override
-    public String toString() {
-      StringBuilder sb = new StringBuilder("GetChoiceReport_args(");
-      boolean first = true;
-
-      sb.append("authentication:");
-      if (this.authentication == null) {
-        sb.append("null");
-      } else {
-        sb.append(this.authentication);
-      }
-      first = false;
-      if (!first) sb.append(", ");
-      sb.append("configuration:");
-      if (this.configuration == null) {
-        sb.append("null");
-      } else {
-        sb.append(this.configuration);
-      }
-      first = false;
-      if (!first) sb.append(", ");
-      sb.append("request:");
-      if (this.request == null) {
-        sb.append("null");
-      } else {
-        sb.append(this.request);
-      }
-      first = false;
-      sb.append(")");
-      return sb.toString();
-    }
-
-    public void validate() throws org.apache.thrift.TException {
-      // check for required fields
-      // check for sub-struct validity
-      if (authentication != null) {
-        authentication.validate();
-      }
-      if (configuration != null) {
-        configuration.validate();
-      }
-      if (request != null) {
-        request.validate();
-      }
-    }
-
-    private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
-      try {
-        write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
-      } catch (org.apache.thrift.TException te) {
-        throw new java.io.IOException(te);
-      }
-    }
-
-    private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, ClassNotFoundException {
-      try {
-        read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
-      } catch (org.apache.thrift.TException te) {
-        throw new java.io.IOException(te);
-      }
-    }
-
-    private static class GetChoiceReport_argsStandardSchemeFactory implements SchemeFactory {
-      public GetChoiceReport_argsStandardScheme getScheme() {
-        return new GetChoiceReport_argsStandardScheme();
-      }
-    }
-
-    private static class GetChoiceReport_argsStandardScheme extends StandardScheme<GetChoiceReport_args> {
-
-      public void read(org.apache.thrift.protocol.TProtocol iprot, GetChoiceReport_args struct) throws org.apache.thrift.TException {
-        org.apache.thrift.protocol.TField schemeField;
-        iprot.readStructBegin();
-        while (true)
-        {
-          schemeField = iprot.readFieldBegin();
-          if (schemeField.type == org.apache.thrift.protocol.TType.STOP) { 
-            break;
-          }
-          switch (schemeField.id) {
-            case 1: // AUTHENTICATION
-              if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
-                struct.authentication = new Authentication();
-                struct.authentication.read(iprot);
-                struct.setAuthenticationIsSet(true);
-              } else { 
-                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
-              }
-              break;
-            case 2: // CONFIGURATION
-              if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
-                struct.configuration = new ConfigurationVersion();
-                struct.configuration.read(iprot);
-                struct.setConfigurationIsSet(true);
-              } else { 
-                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
-              }
-              break;
-            case 3: // REQUEST
-              if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
-                struct.request = new ChoiceReportRequest();
-                struct.request.read(iprot);
-                struct.setRequestIsSet(true);
-              } else { 
-                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
-              }
-              break;
-            default:
-              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
-          }
-          iprot.readFieldEnd();
-        }
-        iprot.readStructEnd();
-
-        // check for required fields of primitive type, which can't be checked in the validate method
-        struct.validate();
-      }
-
-      public void write(org.apache.thrift.protocol.TProtocol oprot, GetChoiceReport_args struct) throws org.apache.thrift.TException {
-        struct.validate();
-
-        oprot.writeStructBegin(STRUCT_DESC);
-        if (struct.authentication != null) {
-          oprot.writeFieldBegin(AUTHENTICATION_FIELD_DESC);
-          struct.authentication.write(oprot);
-          oprot.writeFieldEnd();
-        }
-        if (struct.configuration != null) {
-          oprot.writeFieldBegin(CONFIGURATION_FIELD_DESC);
-          struct.configuration.write(oprot);
-          oprot.writeFieldEnd();
-        }
-        if (struct.request != null) {
-          oprot.writeFieldBegin(REQUEST_FIELD_DESC);
-          struct.request.write(oprot);
-          oprot.writeFieldEnd();
-        }
-        oprot.writeFieldStop();
-        oprot.writeStructEnd();
-      }
-
-    }
-
-    private static class GetChoiceReport_argsTupleSchemeFactory implements SchemeFactory {
-      public GetChoiceReport_argsTupleScheme getScheme() {
-        return new GetChoiceReport_argsTupleScheme();
-      }
-    }
-
-    private static class GetChoiceReport_argsTupleScheme extends TupleScheme<GetChoiceReport_args> {
-
-      @Override
-      public void write(org.apache.thrift.protocol.TProtocol prot, GetChoiceReport_args struct) throws org.apache.thrift.TException {
-        TTupleProtocol oprot = (TTupleProtocol) prot;
-        BitSet optionals = new BitSet();
-        if (struct.isSetAuthentication()) {
-          optionals.set(0);
-        }
-        if (struct.isSetConfiguration()) {
-          optionals.set(1);
-        }
-        if (struct.isSetRequest()) {
-          optionals.set(2);
-        }
-        oprot.writeBitSet(optionals, 3);
-        if (struct.isSetAuthentication()) {
-          struct.authentication.write(oprot);
-        }
-        if (struct.isSetConfiguration()) {
-          struct.configuration.write(oprot);
-        }
-        if (struct.isSetRequest()) {
-          struct.request.write(oprot);
-        }
-      }
-
-      @Override
-      public void read(org.apache.thrift.protocol.TProtocol prot, GetChoiceReport_args struct) throws org.apache.thrift.TException {
-        TTupleProtocol iprot = (TTupleProtocol) prot;
-        BitSet incoming = iprot.readBitSet(3);
-        if (incoming.get(0)) {
-          struct.authentication = new Authentication();
-          struct.authentication.read(iprot);
-          struct.setAuthenticationIsSet(true);
-        }
-        if (incoming.get(1)) {
-          struct.configuration = new ConfigurationVersion();
-          struct.configuration.read(iprot);
-          struct.setConfigurationIsSet(true);
-        }
-        if (incoming.get(2)) {
-          struct.request = new ChoiceReportRequest();
-          struct.request.read(iprot);
-          struct.setRequestIsSet(true);
-        }
-      }
-    }
-
-  }
-
-  public static class GetChoiceReport_result implements org.apache.thrift.TBase<GetChoiceReport_result, GetChoiceReport_result._Fields>, java.io.Serializable, Cloneable, Comparable<GetChoiceReport_result>   {
-    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("GetChoiceReport_result");
-
-    private static final org.apache.thrift.protocol.TField SUCCESS_FIELD_DESC = new org.apache.thrift.protocol.TField("success", org.apache.thrift.protocol.TType.STRUCT, (short)0);
-    private static final org.apache.thrift.protocol.TField E_FIELD_DESC = new org.apache.thrift.protocol.TField("e", org.apache.thrift.protocol.TType.STRUCT, (short)1);
-
-    private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
-    static {
-      schemes.put(StandardScheme.class, new GetChoiceReport_resultStandardSchemeFactory());
-      schemes.put(TupleScheme.class, new GetChoiceReport_resultTupleSchemeFactory());
-    }
-
-    public ChoiceReport success; // required
-    public DataIntelligenceServiceException e; // required
-
-    /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
-    public enum _Fields implements org.apache.thrift.TFieldIdEnum {
-      SUCCESS((short)0, "success"),
-      E((short)1, "e");
-
-      private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
-
-      static {
-        for (_Fields field : EnumSet.allOf(_Fields.class)) {
-          byName.put(field.getFieldName(), field);
-        }
-      }
-
-      /**
-       * Find the _Fields constant that matches fieldId, or null if its not found.
-       */
-      public static _Fields findByThriftId(int fieldId) {
-        switch(fieldId) {
-          case 0: // SUCCESS
-            return SUCCESS;
-          case 1: // E
-            return E;
-          default:
-            return null;
-        }
-      }
-
-      /**
-       * Find the _Fields constant that matches fieldId, throwing an exception
-       * if it is not found.
-       */
-      public static _Fields findByThriftIdOrThrow(int fieldId) {
-        _Fields fields = findByThriftId(fieldId);
-        if (fields == null) throw new IllegalArgumentException("Field " + fieldId + " doesn't exist!");
-        return fields;
-      }
-
-      /**
-       * Find the _Fields constant that matches name, or null if its not found.
-       */
-      public static _Fields findByName(String name) {
-        return byName.get(name);
-      }
-
-      private final short _thriftId;
-      private final String _fieldName;
-
-      _Fields(short thriftId, String fieldName) {
-        _thriftId = thriftId;
-        _fieldName = fieldName;
-      }
-
-      public short getThriftFieldId() {
-        return _thriftId;
-      }
-
-      public String getFieldName() {
-        return _fieldName;
-      }
-    }
-
-    // isset id assignments
-    public static final Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
-    static {
-      Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
-      tmpMap.put(_Fields.SUCCESS, new org.apache.thrift.meta_data.FieldMetaData("success", org.apache.thrift.TFieldRequirementType.DEFAULT, 
-          new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, ChoiceReport.class)));
-      tmpMap.put(_Fields.E, new org.apache.thrift.meta_data.FieldMetaData("e", org.apache.thrift.TFieldRequirementType.DEFAULT, 
-          new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRUCT)));
-      metaDataMap = Collections.unmodifiableMap(tmpMap);
-      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(GetChoiceReport_result.class, metaDataMap);
-    }
-
-    public GetChoiceReport_result() {
-    }
-
-    public GetChoiceReport_result(
-      ChoiceReport success,
-      DataIntelligenceServiceException e)
-    {
-      this();
-      this.success = success;
-      this.e = e;
-    }
-
-    /**
-     * Performs a deep copy on <i>other</i>.
-     */
-    public GetChoiceReport_result(GetChoiceReport_result other) {
-      if (other.isSetSuccess()) {
-        this.success = new ChoiceReport(other.success);
-      }
-      if (other.isSetE()) {
-        this.e = new DataIntelligenceServiceException(other.e);
-      }
-    }
-
-    public GetChoiceReport_result deepCopy() {
-      return new GetChoiceReport_result(this);
-    }
-
-    @Override
-    public void clear() {
-      this.success = null;
-      this.e = null;
-    }
-
-    public ChoiceReport getSuccess() {
-      return this.success;
-    }
-
-    public GetChoiceReport_result setSuccess(ChoiceReport success) {
-      this.success = success;
-      return this;
-    }
-
-    public void unsetSuccess() {
-      this.success = null;
-    }
-
-    /** Returns true if field success is set (has been assigned a value) and false otherwise */
-    public boolean isSetSuccess() {
-      return this.success != null;
-    }
-
-    public void setSuccessIsSet(boolean value) {
-      if (!value) {
-        this.success = null;
-      }
-    }
-
-    public DataIntelligenceServiceException getE() {
-      return this.e;
-    }
-
-    public GetChoiceReport_result setE(DataIntelligenceServiceException e) {
-      this.e = e;
-      return this;
-    }
-
-    public void unsetE() {
-      this.e = null;
-    }
-
-    /** Returns true if field e is set (has been assigned a value) and false otherwise */
-    public boolean isSetE() {
-      return this.e != null;
-    }
-
-    public void setEIsSet(boolean value) {
-      if (!value) {
-        this.e = null;
-      }
-    }
-
-    public void setFieldValue(_Fields field, Object value) {
-      switch (field) {
-      case SUCCESS:
-        if (value == null) {
-          unsetSuccess();
-        } else {
-          setSuccess((ChoiceReport)value);
-        }
-        break;
-
-      case E:
-        if (value == null) {
-          unsetE();
-        } else {
-          setE((DataIntelligenceServiceException)value);
-        }
-        break;
-
-      }
-    }
-
-    public Object getFieldValue(_Fields field) {
-      switch (field) {
-      case SUCCESS:
-        return getSuccess();
-
-      case E:
-        return getE();
-
-      }
-      throw new IllegalStateException();
-    }
-
-    /** Returns true if field corresponding to fieldID is set (has been assigned a value) and false otherwise */
-    public boolean isSet(_Fields field) {
-      if (field == null) {
-        throw new IllegalArgumentException();
-      }
-
-      switch (field) {
-      case SUCCESS:
-        return isSetSuccess();
-      case E:
-        return isSetE();
-      }
-      throw new IllegalStateException();
-    }
-
-    @Override
-    public boolean equals(Object that) {
-      if (that == null)
-        return false;
-      if (that instanceof GetChoiceReport_result)
-        return this.equals((GetChoiceReport_result)that);
-      return false;
-    }
-
-    public boolean equals(GetChoiceReport_result that) {
-      if (that == null)
-        return false;
-
-      boolean this_present_success = true && this.isSetSuccess();
-      boolean that_present_success = true && that.isSetSuccess();
-      if (this_present_success || that_present_success) {
-        if (!(this_present_success && that_present_success))
-          return false;
-        if (!this.success.equals(that.success))
-          return false;
-      }
-
-      boolean this_present_e = true && this.isSetE();
-      boolean that_present_e = true && that.isSetE();
-      if (this_present_e || that_present_e) {
-        if (!(this_present_e && that_present_e))
-          return false;
-        if (!this.e.equals(that.e))
-          return false;
-      }
-
-      return true;
-    }
-
-    @Override
-    public int hashCode() {
-      List<Object> list = new ArrayList<Object>();
-
-      boolean present_success = true && (isSetSuccess());
-      list.add(present_success);
-      if (present_success)
-        list.add(success);
-
-      boolean present_e = true && (isSetE());
-      list.add(present_e);
-      if (present_e)
-        list.add(e);
-
-      return list.hashCode();
-    }
-
-    @Override
-    public int compareTo(GetChoiceReport_result other) {
-      if (!getClass().equals(other.getClass())) {
-        return getClass().getName().compareTo(other.getClass().getName());
-      }
-
-      int lastComparison = 0;
-
-      lastComparison = Boolean.valueOf(isSetSuccess()).compareTo(other.isSetSuccess());
-      if (lastComparison != 0) {
-        return lastComparison;
-      }
-      if (isSetSuccess()) {
-        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.success, other.success);
-        if (lastComparison != 0) {
-          return lastComparison;
-        }
-      }
-      lastComparison = Boolean.valueOf(isSetE()).compareTo(other.isSetE());
-      if (lastComparison != 0) {
-        return lastComparison;
-      }
-      if (isSetE()) {
-        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.e, other.e);
-        if (lastComparison != 0) {
-          return lastComparison;
-        }
-      }
-      return 0;
-    }
-
-    public _Fields fieldForId(int fieldId) {
-      return _Fields.findByThriftId(fieldId);
-    }
-
-    public void read(org.apache.thrift.protocol.TProtocol iprot) throws org.apache.thrift.TException {
-      schemes.get(iprot.getScheme()).getScheme().read(iprot, this);
-    }
-
-    public void write(org.apache.thrift.protocol.TProtocol oprot) throws org.apache.thrift.TException {
-      schemes.get(oprot.getScheme()).getScheme().write(oprot, this);
-      }
-
-    @Override
-    public String toString() {
-      StringBuilder sb = new StringBuilder("GetChoiceReport_result(");
-      boolean first = true;
-
-      sb.append("success:");
-      if (this.success == null) {
-        sb.append("null");
-      } else {
-        sb.append(this.success);
-      }
-      first = false;
-      if (!first) sb.append(", ");
-      sb.append("e:");
-      if (this.e == null) {
-        sb.append("null");
-      } else {
-        sb.append(this.e);
-      }
-      first = false;
-      sb.append(")");
-      return sb.toString();
-    }
-
-    public void validate() throws org.apache.thrift.TException {
-      // check for required fields
-      // check for sub-struct validity
-      if (success != null) {
-        success.validate();
-      }
-    }
-
-    private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
-      try {
-        write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
-      } catch (org.apache.thrift.TException te) {
-        throw new java.io.IOException(te);
-      }
-    }
-
-    private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, ClassNotFoundException {
-      try {
-        read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
-      } catch (org.apache.thrift.TException te) {
-        throw new java.io.IOException(te);
-      }
-    }
-
-    private static class GetChoiceReport_resultStandardSchemeFactory implements SchemeFactory {
-      public GetChoiceReport_resultStandardScheme getScheme() {
-        return new GetChoiceReport_resultStandardScheme();
-      }
-    }
-
-    private static class GetChoiceReport_resultStandardScheme extends StandardScheme<GetChoiceReport_result> {
-
-      public void read(org.apache.thrift.protocol.TProtocol iprot, GetChoiceReport_result struct) throws org.apache.thrift.TException {
-        org.apache.thrift.protocol.TField schemeField;
-        iprot.readStructBegin();
-        while (true)
-        {
-          schemeField = iprot.readFieldBegin();
-          if (schemeField.type == org.apache.thrift.protocol.TType.STOP) { 
-            break;
-          }
-          switch (schemeField.id) {
-            case 0: // SUCCESS
-              if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
-                struct.success = new ChoiceReport();
-                struct.success.read(iprot);
-                struct.setSuccessIsSet(true);
-              } else { 
-                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
-              }
-              break;
-            case 1: // E
-              if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
-                struct.e = new DataIntelligenceServiceException();
-                struct.e.read(iprot);
-                struct.setEIsSet(true);
-              } else { 
-                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
-              }
-              break;
-            default:
-              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
-          }
-          iprot.readFieldEnd();
-        }
-        iprot.readStructEnd();
-
-        // check for required fields of primitive type, which can't be checked in the validate method
-        struct.validate();
-      }
-
-      public void write(org.apache.thrift.protocol.TProtocol oprot, GetChoiceReport_result struct) throws org.apache.thrift.TException {
-        struct.validate();
-
-        oprot.writeStructBegin(STRUCT_DESC);
-        if (struct.success != null) {
-          oprot.writeFieldBegin(SUCCESS_FIELD_DESC);
-          struct.success.write(oprot);
-          oprot.writeFieldEnd();
-        }
-        if (struct.e != null) {
-          oprot.writeFieldBegin(E_FIELD_DESC);
-          struct.e.write(oprot);
-          oprot.writeFieldEnd();
-        }
-        oprot.writeFieldStop();
-        oprot.writeStructEnd();
-      }
-
-    }
-
-    private static class GetChoiceReport_resultTupleSchemeFactory implements SchemeFactory {
-      public GetChoiceReport_resultTupleScheme getScheme() {
-        return new GetChoiceReport_resultTupleScheme();
-      }
-    }
-
-    private static class GetChoiceReport_resultTupleScheme extends TupleScheme<GetChoiceReport_result> {
-
-      @Override
-      public void write(org.apache.thrift.protocol.TProtocol prot, GetChoiceReport_result struct) throws org.apache.thrift.TException {
-        TTupleProtocol oprot = (TTupleProtocol) prot;
-        BitSet optionals = new BitSet();
-        if (struct.isSetSuccess()) {
-          optionals.set(0);
-        }
-        if (struct.isSetE()) {
-          optionals.set(1);
-        }
-        oprot.writeBitSet(optionals, 2);
-        if (struct.isSetSuccess()) {
-          struct.success.write(oprot);
-        }
-        if (struct.isSetE()) {
-          struct.e.write(oprot);
-        }
-      }
-
-      @Override
-      public void read(org.apache.thrift.protocol.TProtocol prot, GetChoiceReport_result struct) throws org.apache.thrift.TException {
-        TTupleProtocol iprot = (TTupleProtocol) prot;
-        BitSet incoming = iprot.readBitSet(2);
-        if (incoming.get(0)) {
-          struct.success = new ChoiceReport();
-          struct.success.read(iprot);
           struct.setSuccessIsSet(true);
         }
         if (incoming.get(1)) {

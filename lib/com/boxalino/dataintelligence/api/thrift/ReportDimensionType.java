@@ -100,37 +100,41 @@ public enum ReportDimensionType implements org.apache.thrift.TEnum {
    */
   INTERNAL_VISITOR_ID(28),
   /**
+   * the different page view urls
+   */
+  PAGE_VIEW_URL(29),
+  /**
    * the different values of a URL parameter (require identifier to be provided with url parameter name)
    */
   URL_PARAMETER(50),
   /**
    * the different values of a transaction property (requires identifier to be provided with the transaction property name)
-   * N.B.: a connection to the transaction property must be available (e.g.: For visit&visitor-based reporting, like ChoiceReport, will only work for the visits/visitors with a transaction)
+   * N.B.: a connection to the transaction property must be available (e.g.: For visit&visitor-based reporting, like BehaviorReport, will only work for the visits/visitors with a transaction)
    */
   TRANSACTION_PROPERTY(100),
   /**
    * the different values of a customer property (requires identifier to be provided with the customer property name)
-   * N.B.: a connection to the transaction property must be available (e.g.: For visit&visitor-based reporting, like ChoiceReport, will only work for the visits/visitors with a login or other ways to link the customer id to the visitor id)
+   * N.B.: a connection to the transaction property must be available (e.g.: For visit&visitor-based reporting, like BehaviorReport, will only work for the visits/visitors with a login or other ways to link the customer id to the visitor id)
    */
   CUSTOMER_PROPERTY(150),
   /**
    * the different values of a product property (requires identifier to be provided with the product property name)
-   * N.B.: a connection to the transaction property must be available (e.g.: For visit&visitor-based reporting, like ChoiceReport, will only work for the visits/visitors with a product purchased)
+   * N.B.: a connection to the transaction property must be available (e.g.: For visit&visitor-based reporting, like BehaviorReport, will only work for the visits/visitors with a product purchased)
    */
   PURCHASED_PRODUCT_PROPERTY(200),
   /**
    * the different values of a product property (requires identifier to be provided with the product property name)
-   * N.B.: a connection to the product property must be available (e.g.: For visit&visitor-based reporting, like ChoiceReport, will only work for the visits/visitors with a product displayed in the choice variant)
+   * N.B.: a connection to the product property must be available (e.g.: For visit&visitor-based reporting, like BehaviorReport, will only work for the visits/visitors with a product displayed in the choice variant)
    */
   PRODUCT_PROPERTY(201),
   /**
    * the different possible choice ids (requires identifier to be provided with the choiceId as indicated in the structure Choice)
-   * N.B.: a connection to the product property must be available (e.g.: For visit&visitor-based reporting, like ChoiceReport, will only work for the visits/visitors with a product displayed in the choice variant)
+   * N.B.: a connection to the product property must be available (e.g.: For visit&visitor-based reporting, like BehaviorReport, will only work for the visits/visitors with a product displayed in the choice variant)
    */
   CHOICE(300),
   /**
    * the different possible choice variant ids (requires identifier to be provided with the choiceVariantIdId as indicated in the structure ChoiceVariant)
-   * N.B.: a connection to the product property must be available (e.g.: For visit&visitor-based reporting, like ChoiceReport, will only work for the visits/visitors with a product displayed in the choice variant)
+   * N.B.: a connection to the product property must be available (e.g.: For visit&visitor-based reporting, like BehaviorReport, will only work for the visits/visitors with a product displayed in the choice variant)
    */
   CHOICE_VARIANT(301),
   /**
@@ -200,6 +204,8 @@ public enum ReportDimensionType implements org.apache.thrift.TEnum {
         return VISITOR_ID;
       case 28:
         return INTERNAL_VISITOR_ID;
+      case 29:
+        return PAGE_VIEW_URL;
       case 50:
         return URL_PARAMETER;
       case 100:

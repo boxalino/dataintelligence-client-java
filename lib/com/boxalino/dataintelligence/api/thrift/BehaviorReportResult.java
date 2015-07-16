@@ -471,14 +471,14 @@ public class BehaviorReportResult implements org.apache.thrift.TBase<BehaviorRep
           case 1: // DIMENSION_VALUES
             if (schemeField.type == org.apache.thrift.protocol.TType.LIST) {
               {
-                org.apache.thrift.protocol.TList _list282 = iprot.readListBegin();
-                struct.dimensionValues = new ArrayList<ReportDimensionValue>(_list282.size);
-                ReportDimensionValue _elem283;
-                for (int _i284 = 0; _i284 < _list282.size; ++_i284)
+                org.apache.thrift.protocol.TList _list242 = iprot.readListBegin();
+                struct.dimensionValues = new ArrayList<ReportDimensionValue>(_list242.size);
+                ReportDimensionValue _elem243;
+                for (int _i244 = 0; _i244 < _list242.size; ++_i244)
                 {
-                  _elem283 = new ReportDimensionValue();
-                  _elem283.read(iprot);
-                  struct.dimensionValues.add(_elem283);
+                  _elem243 = new ReportDimensionValue();
+                  _elem243.read(iprot);
+                  struct.dimensionValues.add(_elem243);
                 }
                 iprot.readListEnd();
               }
@@ -515,9 +515,9 @@ public class BehaviorReportResult implements org.apache.thrift.TBase<BehaviorRep
         oprot.writeFieldBegin(DIMENSION_VALUES_FIELD_DESC);
         {
           oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, struct.dimensionValues.size()));
-          for (ReportDimensionValue _iter285 : struct.dimensionValues)
+          for (ReportDimensionValue _iter245 : struct.dimensionValues)
           {
-            _iter285.write(oprot);
+            _iter245.write(oprot);
           }
           oprot.writeListEnd();
         }
@@ -547,9 +547,9 @@ public class BehaviorReportResult implements org.apache.thrift.TBase<BehaviorRep
       TTupleProtocol oprot = (TTupleProtocol) prot;
       {
         oprot.writeI32(struct.dimensionValues.size());
-        for (ReportDimensionValue _iter286 : struct.dimensionValues)
+        for (ReportDimensionValue _iter246 : struct.dimensionValues)
         {
-          _iter286.write(oprot);
+          _iter246.write(oprot);
         }
       }
       struct.values.write(oprot);
@@ -559,14 +559,14 @@ public class BehaviorReportResult implements org.apache.thrift.TBase<BehaviorRep
     public void read(org.apache.thrift.protocol.TProtocol prot, BehaviorReportResult struct) throws org.apache.thrift.TException {
       TTupleProtocol iprot = (TTupleProtocol) prot;
       {
-        org.apache.thrift.protocol.TList _list287 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
-        struct.dimensionValues = new ArrayList<ReportDimensionValue>(_list287.size);
-        ReportDimensionValue _elem288;
-        for (int _i289 = 0; _i289 < _list287.size; ++_i289)
+        org.apache.thrift.protocol.TList _list247 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
+        struct.dimensionValues = new ArrayList<ReportDimensionValue>(_list247.size);
+        ReportDimensionValue _elem248;
+        for (int _i249 = 0; _i249 < _list247.size; ++_i249)
         {
-          _elem288 = new ReportDimensionValue();
-          _elem288.read(iprot);
-          struct.dimensionValues.add(_elem288);
+          _elem248 = new ReportDimensionValue();
+          _elem248.read(iprot);
+          struct.dimensionValues.add(_elem248);
         }
       }
       struct.setDimensionValuesIsSet(true);

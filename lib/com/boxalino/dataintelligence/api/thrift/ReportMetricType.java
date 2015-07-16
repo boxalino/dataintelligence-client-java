@@ -40,7 +40,11 @@ public enum ReportMetricType implements org.apache.thrift.TEnum {
    */
   PAGE_VIEWS_PER_VISIT(6),
   /**
-   * average time of visits
+   * total time on site in secods
+   */
+  TIME_ON_SITE(31),
+  /**
+   * TIME_ON_SITE / VISITS
    */
   AVERAGE_TIME_ON_SITE(7),
   /**
@@ -246,6 +250,8 @@ public enum ReportMetricType implements org.apache.thrift.TEnum {
         return PAGE_VIEWS;
       case 6:
         return PAGE_VIEWS_PER_VISIT;
+      case 31:
+        return TIME_ON_SITE;
       case 7:
         return AVERAGE_TIME_ON_SITE;
       case 8:

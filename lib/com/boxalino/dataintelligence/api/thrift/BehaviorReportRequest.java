@@ -49,6 +49,7 @@ public class BehaviorReportRequest implements org.apache.thrift.TBase<BehaviorRe
   private static final org.apache.thrift.protocol.TField PRECISION_FIELD_DESC = new org.apache.thrift.protocol.TField("precision", org.apache.thrift.protocol.TType.I32, (short)6);
   private static final org.apache.thrift.protocol.TField START_INDEX_FIELD_DESC = new org.apache.thrift.protocol.TField("startIndex", org.apache.thrift.protocol.TType.I16, (short)7);
   private static final org.apache.thrift.protocol.TField MAX_RESULTS_FIELD_DESC = new org.apache.thrift.protocol.TField("maxResults", org.apache.thrift.protocol.TType.I16, (short)8);
+  private static final org.apache.thrift.protocol.TField IGNORE_FILL_MISSING_TIME_VALUES_WITH_ZEROS_FIELD_DESC = new org.apache.thrift.protocol.TField("ignoreFillMissingTimeValuesWithZeros", org.apache.thrift.protocol.TType.BOOL, (short)9);
 
   private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
   static {
@@ -90,6 +91,10 @@ public class BehaviorReportRequest implements org.apache.thrift.TBase<BehaviorRe
    * an required number of maximum number of results (one result is one source of date rage data in of values for all kpis)
    */
   public short maxResults; // required
+  /**
+   * an optional flag to avoid filling up with zero all possible time precision
+   */
+  public boolean ignoreFillMissingTimeValuesWithZeros; // optional
 
   /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
   public enum _Fields implements org.apache.thrift.TFieldIdEnum {
@@ -126,7 +131,11 @@ public class BehaviorReportRequest implements org.apache.thrift.TBase<BehaviorRe
     /**
      * an required number of maximum number of results (one result is one source of date rage data in of values for all kpis)
      */
-    MAX_RESULTS((short)8, "maxResults");
+    MAX_RESULTS((short)8, "maxResults"),
+    /**
+     * an optional flag to avoid filling up with zero all possible time precision
+     */
+    IGNORE_FILL_MISSING_TIME_VALUES_WITH_ZEROS((short)9, "ignoreFillMissingTimeValuesWithZeros");
 
     private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
 
@@ -157,6 +166,8 @@ public class BehaviorReportRequest implements org.apache.thrift.TBase<BehaviorRe
           return START_INDEX;
         case 8: // MAX_RESULTS
           return MAX_RESULTS;
+        case 9: // IGNORE_FILL_MISSING_TIME_VALUES_WITH_ZEROS
+          return IGNORE_FILL_MISSING_TIME_VALUES_WITH_ZEROS;
         default:
           return null;
       }
@@ -199,8 +210,9 @@ public class BehaviorReportRequest implements org.apache.thrift.TBase<BehaviorRe
   // isset id assignments
   private static final int __STARTINDEX_ISSET_ID = 0;
   private static final int __MAXRESULTS_ISSET_ID = 1;
+  private static final int __IGNOREFILLMISSINGTIMEVALUESWITHZEROS_ISSET_ID = 2;
   private byte __isset_bitfield = 0;
-  private static final _Fields optionals[] = {_Fields.DIMENSIONS,_Fields.FILTER,_Fields.SORT_BYS,_Fields.START_INDEX};
+  private static final _Fields optionals[] = {_Fields.DIMENSIONS,_Fields.FILTER,_Fields.SORT_BYS,_Fields.START_INDEX,_Fields.IGNORE_FILL_MISSING_TIME_VALUES_WITH_ZEROS};
   public static final Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
   static {
     Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
@@ -223,6 +235,8 @@ public class BehaviorReportRequest implements org.apache.thrift.TBase<BehaviorRe
         new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.I16)));
     tmpMap.put(_Fields.MAX_RESULTS, new org.apache.thrift.meta_data.FieldMetaData("maxResults", org.apache.thrift.TFieldRequirementType.REQUIRED, 
         new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.I16)));
+    tmpMap.put(_Fields.IGNORE_FILL_MISSING_TIME_VALUES_WITH_ZEROS, new org.apache.thrift.meta_data.FieldMetaData("ignoreFillMissingTimeValuesWithZeros", org.apache.thrift.TFieldRequirementType.OPTIONAL, 
+        new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.BOOL)));
     metaDataMap = Collections.unmodifiableMap(tmpMap);
     org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(BehaviorReportRequest.class, metaDataMap);
   }
@@ -281,6 +295,7 @@ public class BehaviorReportRequest implements org.apache.thrift.TBase<BehaviorRe
     }
     this.startIndex = other.startIndex;
     this.maxResults = other.maxResults;
+    this.ignoreFillMissingTimeValuesWithZeros = other.ignoreFillMissingTimeValuesWithZeros;
   }
 
   public BehaviorReportRequest deepCopy() {
@@ -299,6 +314,8 @@ public class BehaviorReportRequest implements org.apache.thrift.TBase<BehaviorRe
     this.startIndex = 0;
     setMaxResultsIsSet(false);
     this.maxResults = 0;
+    setIgnoreFillMissingTimeValuesWithZerosIsSet(false);
+    this.ignoreFillMissingTimeValuesWithZeros = false;
   }
 
   public int getMetricsSize() {
@@ -588,6 +605,35 @@ public class BehaviorReportRequest implements org.apache.thrift.TBase<BehaviorRe
     __isset_bitfield = EncodingUtils.setBit(__isset_bitfield, __MAXRESULTS_ISSET_ID, value);
   }
 
+  /**
+   * an optional flag to avoid filling up with zero all possible time precision
+   */
+  public boolean isIgnoreFillMissingTimeValuesWithZeros() {
+    return this.ignoreFillMissingTimeValuesWithZeros;
+  }
+
+  /**
+   * an optional flag to avoid filling up with zero all possible time precision
+   */
+  public BehaviorReportRequest setIgnoreFillMissingTimeValuesWithZeros(boolean ignoreFillMissingTimeValuesWithZeros) {
+    this.ignoreFillMissingTimeValuesWithZeros = ignoreFillMissingTimeValuesWithZeros;
+    setIgnoreFillMissingTimeValuesWithZerosIsSet(true);
+    return this;
+  }
+
+  public void unsetIgnoreFillMissingTimeValuesWithZeros() {
+    __isset_bitfield = EncodingUtils.clearBit(__isset_bitfield, __IGNOREFILLMISSINGTIMEVALUESWITHZEROS_ISSET_ID);
+  }
+
+  /** Returns true if field ignoreFillMissingTimeValuesWithZeros is set (has been assigned a value) and false otherwise */
+  public boolean isSetIgnoreFillMissingTimeValuesWithZeros() {
+    return EncodingUtils.testBit(__isset_bitfield, __IGNOREFILLMISSINGTIMEVALUESWITHZEROS_ISSET_ID);
+  }
+
+  public void setIgnoreFillMissingTimeValuesWithZerosIsSet(boolean value) {
+    __isset_bitfield = EncodingUtils.setBit(__isset_bitfield, __IGNOREFILLMISSINGTIMEVALUESWITHZEROS_ISSET_ID, value);
+  }
+
   public void setFieldValue(_Fields field, Object value) {
     switch (field) {
     case METRICS:
@@ -654,6 +700,14 @@ public class BehaviorReportRequest implements org.apache.thrift.TBase<BehaviorRe
       }
       break;
 
+    case IGNORE_FILL_MISSING_TIME_VALUES_WITH_ZEROS:
+      if (value == null) {
+        unsetIgnoreFillMissingTimeValuesWithZeros();
+      } else {
+        setIgnoreFillMissingTimeValuesWithZeros((Boolean)value);
+      }
+      break;
+
     }
   }
 
@@ -683,6 +737,9 @@ public class BehaviorReportRequest implements org.apache.thrift.TBase<BehaviorRe
     case MAX_RESULTS:
       return Short.valueOf(getMaxResults());
 
+    case IGNORE_FILL_MISSING_TIME_VALUES_WITH_ZEROS:
+      return Boolean.valueOf(isIgnoreFillMissingTimeValuesWithZeros());
+
     }
     throw new IllegalStateException();
   }
@@ -710,6 +767,8 @@ public class BehaviorReportRequest implements org.apache.thrift.TBase<BehaviorRe
       return isSetStartIndex();
     case MAX_RESULTS:
       return isSetMaxResults();
+    case IGNORE_FILL_MISSING_TIME_VALUES_WITH_ZEROS:
+      return isSetIgnoreFillMissingTimeValuesWithZeros();
     }
     throw new IllegalStateException();
   }
@@ -799,6 +858,15 @@ public class BehaviorReportRequest implements org.apache.thrift.TBase<BehaviorRe
         return false;
     }
 
+    boolean this_present_ignoreFillMissingTimeValuesWithZeros = true && this.isSetIgnoreFillMissingTimeValuesWithZeros();
+    boolean that_present_ignoreFillMissingTimeValuesWithZeros = true && that.isSetIgnoreFillMissingTimeValuesWithZeros();
+    if (this_present_ignoreFillMissingTimeValuesWithZeros || that_present_ignoreFillMissingTimeValuesWithZeros) {
+      if (!(this_present_ignoreFillMissingTimeValuesWithZeros && that_present_ignoreFillMissingTimeValuesWithZeros))
+        return false;
+      if (this.ignoreFillMissingTimeValuesWithZeros != that.ignoreFillMissingTimeValuesWithZeros)
+        return false;
+    }
+
     return true;
   }
 
@@ -845,6 +913,11 @@ public class BehaviorReportRequest implements org.apache.thrift.TBase<BehaviorRe
     list.add(present_maxResults);
     if (present_maxResults)
       list.add(maxResults);
+
+    boolean present_ignoreFillMissingTimeValuesWithZeros = true && (isSetIgnoreFillMissingTimeValuesWithZeros());
+    list.add(present_ignoreFillMissingTimeValuesWithZeros);
+    if (present_ignoreFillMissingTimeValuesWithZeros)
+      list.add(ignoreFillMissingTimeValuesWithZeros);
 
     return list.hashCode();
   }
@@ -937,6 +1010,16 @@ public class BehaviorReportRequest implements org.apache.thrift.TBase<BehaviorRe
         return lastComparison;
       }
     }
+    lastComparison = Boolean.valueOf(isSetIgnoreFillMissingTimeValuesWithZeros()).compareTo(other.isSetIgnoreFillMissingTimeValuesWithZeros());
+    if (lastComparison != 0) {
+      return lastComparison;
+    }
+    if (isSetIgnoreFillMissingTimeValuesWithZeros()) {
+      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.ignoreFillMissingTimeValuesWithZeros, other.ignoreFillMissingTimeValuesWithZeros);
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+    }
     return 0;
   }
 
@@ -1020,6 +1103,12 @@ public class BehaviorReportRequest implements org.apache.thrift.TBase<BehaviorRe
     sb.append("maxResults:");
     sb.append(this.maxResults);
     first = false;
+    if (isSetIgnoreFillMissingTimeValuesWithZeros()) {
+      if (!first) sb.append(", ");
+      sb.append("ignoreFillMissingTimeValuesWithZeros:");
+      sb.append(this.ignoreFillMissingTimeValuesWithZeros);
+      first = false;
+    }
     sb.append(")");
     return sb.toString();
   }
@@ -1084,14 +1173,14 @@ public class BehaviorReportRequest implements org.apache.thrift.TBase<BehaviorRe
           case 1: // METRICS
             if (schemeField.type == org.apache.thrift.protocol.TType.LIST) {
               {
-                org.apache.thrift.protocol.TList _list258 = iprot.readListBegin();
-                struct.metrics = new ArrayList<ReportMetric>(_list258.size);
-                ReportMetric _elem259;
-                for (int _i260 = 0; _i260 < _list258.size; ++_i260)
+                org.apache.thrift.protocol.TList _list218 = iprot.readListBegin();
+                struct.metrics = new ArrayList<ReportMetric>(_list218.size);
+                ReportMetric _elem219;
+                for (int _i220 = 0; _i220 < _list218.size; ++_i220)
                 {
-                  _elem259 = new ReportMetric();
-                  _elem259.read(iprot);
-                  struct.metrics.add(_elem259);
+                  _elem219 = new ReportMetric();
+                  _elem219.read(iprot);
+                  struct.metrics.add(_elem219);
                 }
                 iprot.readListEnd();
               }
@@ -1103,14 +1192,14 @@ public class BehaviorReportRequest implements org.apache.thrift.TBase<BehaviorRe
           case 2: // DIMENSIONS
             if (schemeField.type == org.apache.thrift.protocol.TType.LIST) {
               {
-                org.apache.thrift.protocol.TList _list261 = iprot.readListBegin();
-                struct.dimensions = new ArrayList<ReportDimension>(_list261.size);
-                ReportDimension _elem262;
-                for (int _i263 = 0; _i263 < _list261.size; ++_i263)
+                org.apache.thrift.protocol.TList _list221 = iprot.readListBegin();
+                struct.dimensions = new ArrayList<ReportDimension>(_list221.size);
+                ReportDimension _elem222;
+                for (int _i223 = 0; _i223 < _list221.size; ++_i223)
                 {
-                  _elem262 = new ReportDimension();
-                  _elem262.read(iprot);
-                  struct.dimensions.add(_elem262);
+                  _elem222 = new ReportDimension();
+                  _elem222.read(iprot);
+                  struct.dimensions.add(_elem222);
                 }
                 iprot.readListEnd();
               }
@@ -1131,14 +1220,14 @@ public class BehaviorReportRequest implements org.apache.thrift.TBase<BehaviorRe
           case 4: // SORT_BYS
             if (schemeField.type == org.apache.thrift.protocol.TType.LIST) {
               {
-                org.apache.thrift.protocol.TList _list264 = iprot.readListBegin();
-                struct.sortBys = new ArrayList<ReportMetric>(_list264.size);
-                ReportMetric _elem265;
-                for (int _i266 = 0; _i266 < _list264.size; ++_i266)
+                org.apache.thrift.protocol.TList _list224 = iprot.readListBegin();
+                struct.sortBys = new ArrayList<ReportMetric>(_list224.size);
+                ReportMetric _elem225;
+                for (int _i226 = 0; _i226 < _list224.size; ++_i226)
                 {
-                  _elem265 = new ReportMetric();
-                  _elem265.read(iprot);
-                  struct.sortBys.add(_elem265);
+                  _elem225 = new ReportMetric();
+                  _elem225.read(iprot);
+                  struct.sortBys.add(_elem225);
                 }
                 iprot.readListEnd();
               }
@@ -1180,6 +1269,14 @@ public class BehaviorReportRequest implements org.apache.thrift.TBase<BehaviorRe
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
             }
             break;
+          case 9: // IGNORE_FILL_MISSING_TIME_VALUES_WITH_ZEROS
+            if (schemeField.type == org.apache.thrift.protocol.TType.BOOL) {
+              struct.ignoreFillMissingTimeValuesWithZeros = iprot.readBool();
+              struct.setIgnoreFillMissingTimeValuesWithZerosIsSet(true);
+            } else { 
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+            }
+            break;
           default:
             org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
         }
@@ -1202,9 +1299,9 @@ public class BehaviorReportRequest implements org.apache.thrift.TBase<BehaviorRe
         oprot.writeFieldBegin(METRICS_FIELD_DESC);
         {
           oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, struct.metrics.size()));
-          for (ReportMetric _iter267 : struct.metrics)
+          for (ReportMetric _iter227 : struct.metrics)
           {
-            _iter267.write(oprot);
+            _iter227.write(oprot);
           }
           oprot.writeListEnd();
         }
@@ -1215,9 +1312,9 @@ public class BehaviorReportRequest implements org.apache.thrift.TBase<BehaviorRe
           oprot.writeFieldBegin(DIMENSIONS_FIELD_DESC);
           {
             oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, struct.dimensions.size()));
-            for (ReportDimension _iter268 : struct.dimensions)
+            for (ReportDimension _iter228 : struct.dimensions)
             {
-              _iter268.write(oprot);
+              _iter228.write(oprot);
             }
             oprot.writeListEnd();
           }
@@ -1236,9 +1333,9 @@ public class BehaviorReportRequest implements org.apache.thrift.TBase<BehaviorRe
           oprot.writeFieldBegin(SORT_BYS_FIELD_DESC);
           {
             oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, struct.sortBys.size()));
-            for (ReportMetric _iter269 : struct.sortBys)
+            for (ReportMetric _iter229 : struct.sortBys)
             {
-              _iter269.write(oprot);
+              _iter229.write(oprot);
             }
             oprot.writeListEnd();
           }
@@ -1263,6 +1360,11 @@ public class BehaviorReportRequest implements org.apache.thrift.TBase<BehaviorRe
       oprot.writeFieldBegin(MAX_RESULTS_FIELD_DESC);
       oprot.writeI16(struct.maxResults);
       oprot.writeFieldEnd();
+      if (struct.isSetIgnoreFillMissingTimeValuesWithZeros()) {
+        oprot.writeFieldBegin(IGNORE_FILL_MISSING_TIME_VALUES_WITH_ZEROS_FIELD_DESC);
+        oprot.writeBool(struct.ignoreFillMissingTimeValuesWithZeros);
+        oprot.writeFieldEnd();
+      }
       oprot.writeFieldStop();
       oprot.writeStructEnd();
     }
@@ -1282,9 +1384,9 @@ public class BehaviorReportRequest implements org.apache.thrift.TBase<BehaviorRe
       TTupleProtocol oprot = (TTupleProtocol) prot;
       {
         oprot.writeI32(struct.metrics.size());
-        for (ReportMetric _iter270 : struct.metrics)
+        for (ReportMetric _iter230 : struct.metrics)
         {
-          _iter270.write(oprot);
+          _iter230.write(oprot);
         }
       }
       struct.range.write(oprot);
@@ -1303,13 +1405,16 @@ public class BehaviorReportRequest implements org.apache.thrift.TBase<BehaviorRe
       if (struct.isSetStartIndex()) {
         optionals.set(3);
       }
-      oprot.writeBitSet(optionals, 4);
+      if (struct.isSetIgnoreFillMissingTimeValuesWithZeros()) {
+        optionals.set(4);
+      }
+      oprot.writeBitSet(optionals, 5);
       if (struct.isSetDimensions()) {
         {
           oprot.writeI32(struct.dimensions.size());
-          for (ReportDimension _iter271 : struct.dimensions)
+          for (ReportDimension _iter231 : struct.dimensions)
           {
-            _iter271.write(oprot);
+            _iter231.write(oprot);
           }
         }
       }
@@ -1319,14 +1424,17 @@ public class BehaviorReportRequest implements org.apache.thrift.TBase<BehaviorRe
       if (struct.isSetSortBys()) {
         {
           oprot.writeI32(struct.sortBys.size());
-          for (ReportMetric _iter272 : struct.sortBys)
+          for (ReportMetric _iter232 : struct.sortBys)
           {
-            _iter272.write(oprot);
+            _iter232.write(oprot);
           }
         }
       }
       if (struct.isSetStartIndex()) {
         oprot.writeI16(struct.startIndex);
+      }
+      if (struct.isSetIgnoreFillMissingTimeValuesWithZeros()) {
+        oprot.writeBool(struct.ignoreFillMissingTimeValuesWithZeros);
       }
     }
 
@@ -1334,14 +1442,14 @@ public class BehaviorReportRequest implements org.apache.thrift.TBase<BehaviorRe
     public void read(org.apache.thrift.protocol.TProtocol prot, BehaviorReportRequest struct) throws org.apache.thrift.TException {
       TTupleProtocol iprot = (TTupleProtocol) prot;
       {
-        org.apache.thrift.protocol.TList _list273 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
-        struct.metrics = new ArrayList<ReportMetric>(_list273.size);
-        ReportMetric _elem274;
-        for (int _i275 = 0; _i275 < _list273.size; ++_i275)
+        org.apache.thrift.protocol.TList _list233 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
+        struct.metrics = new ArrayList<ReportMetric>(_list233.size);
+        ReportMetric _elem234;
+        for (int _i235 = 0; _i235 < _list233.size; ++_i235)
         {
-          _elem274 = new ReportMetric();
-          _elem274.read(iprot);
-          struct.metrics.add(_elem274);
+          _elem234 = new ReportMetric();
+          _elem234.read(iprot);
+          struct.metrics.add(_elem234);
         }
       }
       struct.setMetricsIsSet(true);
@@ -1352,17 +1460,17 @@ public class BehaviorReportRequest implements org.apache.thrift.TBase<BehaviorRe
       struct.setPrecisionIsSet(true);
       struct.maxResults = iprot.readI16();
       struct.setMaxResultsIsSet(true);
-      BitSet incoming = iprot.readBitSet(4);
+      BitSet incoming = iprot.readBitSet(5);
       if (incoming.get(0)) {
         {
-          org.apache.thrift.protocol.TList _list276 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
-          struct.dimensions = new ArrayList<ReportDimension>(_list276.size);
-          ReportDimension _elem277;
-          for (int _i278 = 0; _i278 < _list276.size; ++_i278)
+          org.apache.thrift.protocol.TList _list236 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
+          struct.dimensions = new ArrayList<ReportDimension>(_list236.size);
+          ReportDimension _elem237;
+          for (int _i238 = 0; _i238 < _list236.size; ++_i238)
           {
-            _elem277 = new ReportDimension();
-            _elem277.read(iprot);
-            struct.dimensions.add(_elem277);
+            _elem237 = new ReportDimension();
+            _elem237.read(iprot);
+            struct.dimensions.add(_elem237);
           }
         }
         struct.setDimensionsIsSet(true);
@@ -1374,14 +1482,14 @@ public class BehaviorReportRequest implements org.apache.thrift.TBase<BehaviorRe
       }
       if (incoming.get(2)) {
         {
-          org.apache.thrift.protocol.TList _list279 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
-          struct.sortBys = new ArrayList<ReportMetric>(_list279.size);
-          ReportMetric _elem280;
-          for (int _i281 = 0; _i281 < _list279.size; ++_i281)
+          org.apache.thrift.protocol.TList _list239 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
+          struct.sortBys = new ArrayList<ReportMetric>(_list239.size);
+          ReportMetric _elem240;
+          for (int _i241 = 0; _i241 < _list239.size; ++_i241)
           {
-            _elem280 = new ReportMetric();
-            _elem280.read(iprot);
-            struct.sortBys.add(_elem280);
+            _elem240 = new ReportMetric();
+            _elem240.read(iprot);
+            struct.sortBys.add(_elem240);
           }
         }
         struct.setSortBysIsSet(true);
@@ -1389,6 +1497,10 @@ public class BehaviorReportRequest implements org.apache.thrift.TBase<BehaviorRe
       if (incoming.get(3)) {
         struct.startIndex = iprot.readI16();
         struct.setStartIndexIsSet(true);
+      }
+      if (incoming.get(4)) {
+        struct.ignoreFillMissingTimeValuesWithZeros = iprot.readBool();
+        struct.setIgnoreFillMissingTimeValuesWithZerosIsSet(true);
       }
     }
   }

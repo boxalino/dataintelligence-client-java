@@ -478,14 +478,14 @@ public class ReportResultKeyValues implements org.apache.thrift.TBase<ReportResu
           case 2: // VALUES
             if (schemeField.type == org.apache.thrift.protocol.TType.LIST) {
               {
-                org.apache.thrift.protocol.TList _list194 = iprot.readListBegin();
-                struct.values = new ArrayList<ReportMetricValue>(_list194.size);
-                ReportMetricValue _elem195;
-                for (int _i196 = 0; _i196 < _list194.size; ++_i196)
+                org.apache.thrift.protocol.TList _list162 = iprot.readListBegin();
+                struct.values = new ArrayList<ReportMetricValue>(_list162.size);
+                ReportMetricValue _elem163;
+                for (int _i164 = 0; _i164 < _list162.size; ++_i164)
                 {
-                  _elem195 = new ReportMetricValue();
-                  _elem195.read(iprot);
-                  struct.values.add(_elem195);
+                  _elem163 = new ReportMetricValue();
+                  _elem163.read(iprot);
+                  struct.values.add(_elem163);
                 }
                 iprot.readListEnd();
               }
@@ -518,9 +518,9 @@ public class ReportResultKeyValues implements org.apache.thrift.TBase<ReportResu
         oprot.writeFieldBegin(VALUES_FIELD_DESC);
         {
           oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, struct.values.size()));
-          for (ReportMetricValue _iter197 : struct.values)
+          for (ReportMetricValue _iter165 : struct.values)
           {
-            _iter197.write(oprot);
+            _iter165.write(oprot);
           }
           oprot.writeListEnd();
         }
@@ -546,9 +546,9 @@ public class ReportResultKeyValues implements org.apache.thrift.TBase<ReportResu
       struct.range.write(oprot);
       {
         oprot.writeI32(struct.values.size());
-        for (ReportMetricValue _iter198 : struct.values)
+        for (ReportMetricValue _iter166 : struct.values)
         {
-          _iter198.write(oprot);
+          _iter166.write(oprot);
         }
       }
     }
@@ -560,14 +560,14 @@ public class ReportResultKeyValues implements org.apache.thrift.TBase<ReportResu
       struct.range.read(iprot);
       struct.setRangeIsSet(true);
       {
-        org.apache.thrift.protocol.TList _list199 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
-        struct.values = new ArrayList<ReportMetricValue>(_list199.size);
-        ReportMetricValue _elem200;
-        for (int _i201 = 0; _i201 < _list199.size; ++_i201)
+        org.apache.thrift.protocol.TList _list167 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
+        struct.values = new ArrayList<ReportMetricValue>(_list167.size);
+        ReportMetricValue _elem168;
+        for (int _i169 = 0; _i169 < _list167.size; ++_i169)
         {
-          _elem200 = new ReportMetricValue();
-          _elem200.read(iprot);
-          struct.values.add(_elem200);
+          _elem168 = new ReportMetricValue();
+          _elem168.read(iprot);
+          struct.values.add(_elem168);
         }
       }
       struct.setValuesIsSet(true);

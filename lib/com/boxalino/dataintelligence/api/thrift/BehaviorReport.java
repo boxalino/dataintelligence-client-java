@@ -470,14 +470,14 @@ public class BehaviorReport implements org.apache.thrift.TBase<BehaviorReport, B
           case 1: // RESULTS
             if (schemeField.type == org.apache.thrift.protocol.TType.LIST) {
               {
-                org.apache.thrift.protocol.TList _list290 = iprot.readListBegin();
-                struct.results = new ArrayList<BehaviorReportResult>(_list290.size);
-                BehaviorReportResult _elem291;
-                for (int _i292 = 0; _i292 < _list290.size; ++_i292)
+                org.apache.thrift.protocol.TList _list250 = iprot.readListBegin();
+                struct.results = new ArrayList<BehaviorReportResult>(_list250.size);
+                BehaviorReportResult _elem251;
+                for (int _i252 = 0; _i252 < _list250.size; ++_i252)
                 {
-                  _elem291 = new BehaviorReportResult();
-                  _elem291.read(iprot);
-                  struct.results.add(_elem291);
+                  _elem251 = new BehaviorReportResult();
+                  _elem251.read(iprot);
+                  struct.results.add(_elem251);
                 }
                 iprot.readListEnd();
               }
@@ -514,9 +514,9 @@ public class BehaviorReport implements org.apache.thrift.TBase<BehaviorReport, B
         oprot.writeFieldBegin(RESULTS_FIELD_DESC);
         {
           oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, struct.results.size()));
-          for (BehaviorReportResult _iter293 : struct.results)
+          for (BehaviorReportResult _iter253 : struct.results)
           {
-            _iter293.write(oprot);
+            _iter253.write(oprot);
           }
           oprot.writeListEnd();
         }
@@ -546,9 +546,9 @@ public class BehaviorReport implements org.apache.thrift.TBase<BehaviorReport, B
       TTupleProtocol oprot = (TTupleProtocol) prot;
       {
         oprot.writeI32(struct.results.size());
-        for (BehaviorReportResult _iter294 : struct.results)
+        for (BehaviorReportResult _iter254 : struct.results)
         {
-          _iter294.write(oprot);
+          _iter254.write(oprot);
         }
       }
       struct.sumResult.write(oprot);
@@ -558,14 +558,14 @@ public class BehaviorReport implements org.apache.thrift.TBase<BehaviorReport, B
     public void read(org.apache.thrift.protocol.TProtocol prot, BehaviorReport struct) throws org.apache.thrift.TException {
       TTupleProtocol iprot = (TTupleProtocol) prot;
       {
-        org.apache.thrift.protocol.TList _list295 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
-        struct.results = new ArrayList<BehaviorReportResult>(_list295.size);
-        BehaviorReportResult _elem296;
-        for (int _i297 = 0; _i297 < _list295.size; ++_i297)
+        org.apache.thrift.protocol.TList _list255 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
+        struct.results = new ArrayList<BehaviorReportResult>(_list255.size);
+        BehaviorReportResult _elem256;
+        for (int _i257 = 0; _i257 < _list255.size; ++_i257)
         {
-          _elem296 = new BehaviorReportResult();
-          _elem296.read(iprot);
-          struct.results.add(_elem296);
+          _elem256 = new BehaviorReportResult();
+          _elem256.read(iprot);
+          struct.results.add(_elem256);
         }
       }
       struct.setResultsIsSet(true);

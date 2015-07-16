@@ -470,14 +470,14 @@ public class TransactionReport implements org.apache.thrift.TBase<TransactionRep
           case 1: // RESULTS
             if (schemeField.type == org.apache.thrift.protocol.TType.LIST) {
               {
-                org.apache.thrift.protocol.TList _list250 = iprot.readListBegin();
-                struct.results = new ArrayList<TransactionReportResult>(_list250.size);
-                TransactionReportResult _elem251;
-                for (int _i252 = 0; _i252 < _list250.size; ++_i252)
+                org.apache.thrift.protocol.TList _list210 = iprot.readListBegin();
+                struct.results = new ArrayList<TransactionReportResult>(_list210.size);
+                TransactionReportResult _elem211;
+                for (int _i212 = 0; _i212 < _list210.size; ++_i212)
                 {
-                  _elem251 = new TransactionReportResult();
-                  _elem251.read(iprot);
-                  struct.results.add(_elem251);
+                  _elem211 = new TransactionReportResult();
+                  _elem211.read(iprot);
+                  struct.results.add(_elem211);
                 }
                 iprot.readListEnd();
               }
@@ -514,9 +514,9 @@ public class TransactionReport implements org.apache.thrift.TBase<TransactionRep
         oprot.writeFieldBegin(RESULTS_FIELD_DESC);
         {
           oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, struct.results.size()));
-          for (TransactionReportResult _iter253 : struct.results)
+          for (TransactionReportResult _iter213 : struct.results)
           {
-            _iter253.write(oprot);
+            _iter213.write(oprot);
           }
           oprot.writeListEnd();
         }
@@ -546,9 +546,9 @@ public class TransactionReport implements org.apache.thrift.TBase<TransactionRep
       TTupleProtocol oprot = (TTupleProtocol) prot;
       {
         oprot.writeI32(struct.results.size());
-        for (TransactionReportResult _iter254 : struct.results)
+        for (TransactionReportResult _iter214 : struct.results)
         {
-          _iter254.write(oprot);
+          _iter214.write(oprot);
         }
       }
       struct.sumResult.write(oprot);
@@ -558,14 +558,14 @@ public class TransactionReport implements org.apache.thrift.TBase<TransactionRep
     public void read(org.apache.thrift.protocol.TProtocol prot, TransactionReport struct) throws org.apache.thrift.TException {
       TTupleProtocol iprot = (TTupleProtocol) prot;
       {
-        org.apache.thrift.protocol.TList _list255 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
-        struct.results = new ArrayList<TransactionReportResult>(_list255.size);
-        TransactionReportResult _elem256;
-        for (int _i257 = 0; _i257 < _list255.size; ++_i257)
+        org.apache.thrift.protocol.TList _list215 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
+        struct.results = new ArrayList<TransactionReportResult>(_list215.size);
+        TransactionReportResult _elem216;
+        for (int _i217 = 0; _i217 < _list215.size; ++_i217)
         {
-          _elem256 = new TransactionReportResult();
-          _elem256.read(iprot);
-          struct.results.add(_elem256);
+          _elem216 = new TransactionReportResult();
+          _elem216.read(iprot);
+          struct.results.add(_elem216);
         }
       }
       struct.setResultsIsSet(true);
