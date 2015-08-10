@@ -30,7 +30,7 @@ public enum ReportDimensionType implements org.apache.thrift.TEnum {
   /**
    * the detected subdivision (Kanton for Switzerland) of the visitor (NULL if none detected)
    */
-  GEO_SUBDIVISION(4),
+  GEO_SUBDIVISION(10),
   /**
    * the detected city of the visitor (NULL if none detected)
    */
@@ -38,7 +38,7 @@ public enum ReportDimensionType implements org.apache.thrift.TEnum {
   /**
    * the user agent name (most common values: IE,Mobile Safari,Chrome,Firefox,Safari,Android browser,Chrome Mobile,Java,IE Mobile,Opera,Mobile Firefox)
    */
-  BROWSER_NAME(5),
+  BROWSER_NAME(11),
   /**
    * the user agent version
    */
@@ -168,11 +168,11 @@ public enum ReportDimensionType implements org.apache.thrift.TEnum {
         return GEO_COUNTRY;
       case 3:
         return GEO_ZIP;
-      case 4:
+      case 10:
         return GEO_SUBDIVISION;
       case 4:
         return GEO_CITY;
-      case 5:
+      case 11:
         return BROWSER_NAME;
       case 5:
         return BROWSER_VERSION;

@@ -146,6 +146,18 @@ public enum ReportMetricType implements org.apache.thrift.TEnum {
    */
   EVENT_COUNT(40),
   /**
+   * number of e-mails sent
+   */
+  MAIL_SENT(50),
+  /**
+   * number of e-mails opened
+   */
+  MAIL_OPENED(51),
+  /**
+   * number of e-mails clicked
+   */
+  MAIL_CLICKED(52),
+  /**
    * number of display of a choice
    */
   CHOICE_DISPLAYS(100),
@@ -302,6 +314,12 @@ public enum ReportMetricType implements org.apache.thrift.TEnum {
         return VISITS_WITH_ADD_TO_BASKETS_RATE;
       case 40:
         return EVENT_COUNT;
+      case 50:
+        return MAIL_SENT;
+      case 51:
+        return MAIL_OPENED;
+      case 52:
+        return MAIL_CLICKED;
       case 100:
         return CHOICE_DISPLAYS;
       case 101:
